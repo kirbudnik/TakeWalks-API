@@ -1,0 +1,1862 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Walks User API</title>
+    <style type="text/css">
+      body {
+	font-family: Trebuchet MS, sans-serif;
+	font-size: 15px;
+	color: #444;
+	margin-right: 24px;
+}
+
+h1	{
+	font-size: 25px;
+}
+h2	{
+	font-size: 20px;
+}
+h3	{
+	font-size: 16px;
+	font-weight: bold;
+}
+hr	{
+	height: 1px;
+	border: 0;
+	color: #ddd;
+	background-color: #ddd;
+}
+
+.app-desc {
+  clear: both;
+  margin-left: 20px;
+}
+.param-name {
+  width: 100%;
+}
+.license-info {
+  margin-left: 20px;
+}
+
+.license-url {
+  margin-left: 20px;
+}
+
+.model {
+  margin: 0 0 0px 20px;
+}
+
+.method {
+  margin-left: 20px;
+}
+
+.method-notes	{
+	margin: 10px 0 20px 0;
+	font-size: 90%;
+	color: #555;
+}
+
+pre {
+  padding: 10px;
+  margin-bottom: 2px;
+}
+
+.http-method {
+ text-transform: uppercase;
+}
+
+pre.get {
+  background-color: #0f6ab4;
+}
+
+pre.post {
+  background-color: #10a54a;
+}
+
+pre.put {
+  background-color: #c5862b;
+}
+
+pre.delete {
+  background-color: #a41e22;
+}
+
+.huge	{
+	color: #fff;
+}
+
+pre.example {
+  background-color: #f3f3f3;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+code {
+  white-space: pre;
+}
+
+.nickname {
+  font-weight: bold;
+}
+
+.method-path {
+  font-size: 1.5em;
+  background-color: #0f6ab4;
+}
+
+.up {
+  float:right;
+}
+
+.parameter {
+  width: 500px;
+}
+
+.param {
+  width: 500px;
+  padding: 10px 0 0 20px;
+  font-weight: bold;
+}
+
+.param-desc {
+  width: 700px;
+  padding: 0 0 0 20px;
+  color: #777;
+}
+
+.param-type {
+  font-style: italic;
+}
+
+.param-enum-header {
+width: 700px;
+padding: 0 0 0 60px;
+color: #777;
+font-weight: bold;
+}
+
+.param-enum {
+width: 700px;
+padding: 0 0 0 80px;
+color: #777;
+font-style: italic;
+}
+
+.field-label {
+  padding: 0;
+  margin: 0;
+  clear: both;
+}
+
+.field-items	{
+	padding: 0 0 15px 0;
+	margin-bottom: 15px;
+}
+
+.return-type {
+  clear: both;
+  padding-bottom: 10px;
+}
+
+.param-header {
+  font-weight: bold;
+}
+
+.method-tags {
+  text-align: right;
+}
+
+.method-tag {
+  background: none repeat scroll 0% 0% #24A600;
+  border-radius: 3px;
+  padding: 2px 10px;
+  margin: 2px;
+  color: #FFF;
+  display: inline-block;
+  text-decoration: none;
+}
+
+    </style>
+  </head>
+  <body>
+  <h1>Walks User API</h1>
+    <div class="app-desc">.</div>
+    <div class="app-desc">More information: <a href=""></a></div>
+    <div class="app-desc">Contact Info: <a href="admins@walks.org">admins@walks.org</a></div>
+    <div class="app-desc">Version: 1.0.0</div>
+    <div class="app-desc">BasePath:/v1</div>
+    <div class="license-info">All rights reserved</div>
+    <div class="license-url">http://apache.org/licenses/LICENSE-2.0.html</div>
+  <h2>Access</h2>
+    <ol>
+      <li>APIKey KeyParamName:Authorization KeyInQuery:false KeyInHeader:true</li>
+    </ol>
+
+  <h2><a name="__Methods">Methods</a></h2>
+  [ Jump to <a href="#__Models">Models</a> ]
+
+  <h3>Table of Contents </h3>
+  <div class="method-summary"></div>
+  <h4><a href="#OAuth">OAuth</a></h4>
+  <ul>
+  <li><a href="#postOauthToken"><code><span class="http-method">post</span> /oauth/token</code></a></li>
+  </ul>
+  <h4><a href="#User">User</a></h4>
+  <ul>
+  <li><a href="#addUser"><code><span class="http-method">post</span> /user</code></a></li>
+  <li><a href="#addUserDestination"><code><span class="http-method">post</span> /user/{userId}/destination</code></a></li>
+  <li><a href="#addUserSocialProvider"><code><span class="http-method">post</span> /user/{userId}/social</code></a></li>
+  <li><a href="#addUserTraveler"><code><span class="http-method">post</span> /user/{userId}/traveler</code></a></li>
+  <li><a href="#addUserWishlist"><code><span class="http-method">post</span> /user/{userId}/wishlist</code></a></li>
+  <li><a href="#deleteUser"><code><span class="http-method">delete</span> /user/{userId}</code></a></li>
+  <li><a href="#deleteUserDestination"><code><span class="http-method">delete</span> /user/{userId}/destination</code></a></li>
+  <li><a href="#deleteUserSocialProvider"><code><span class="http-method">delete</span> /user/{userId}/social</code></a></li>
+  <li><a href="#deleteUserTraveler"><code><span class="http-method">delete</span> /user/{userId}/traveler</code></a></li>
+  <li><a href="#deleteWishlistItem"><code><span class="http-method">delete</span> /user/{userId}/wishlist</code></a></li>
+  <li><a href="#getUserById"><code><span class="http-method">get</span> /user/{userId}</code></a></li>
+  <li><a href="#loginSocialMedia"><code><span class="http-method">post</span> /user/login/social</code></a></li>
+  <li><a href="#loginUser"><code><span class="http-method">get</span> /user/login</code></a></li>
+  <li><a href="#logoutUser"><code><span class="http-method">get</span> /user/logout</code></a></li>
+  <li><a href="#passwordEmail"><code><span class="http-method">put</span> /user/passwordEmail</code></a></li>
+  <li><a href="#passwordReset"><code><span class="http-method">put</span> /user/{userId}/passwordReset</code></a></li>
+  <li><a href="#updateUser"><code><span class="http-method">post</span> /user/{userId}</code></a></li>
+  <li><a href="#userBookingCancel"><code><span class="http-method">post</span> /user/{userId}/booking/cancel</code></a></li>
+  <li><a href="#userDestination"><code><span class="http-method">get</span> /user/{userId}/destination</code></a></li>
+  <li><a href="#userPasswordChange"><code><span class="http-method">post</span> /user/{userId}/password/change</code></a></li>
+  <li><a href="#userSocial"><code><span class="http-method">get</span> /user/{userId}/social</code></a></li>
+  <li><a href="#userTourlist"><code><span class="http-method">get</span> /user/{userId}/tourlist</code></a></li>
+  <li><a href="#userTraveler"><code><span class="http-method">get</span> /user/{userId}/traveler</code></a></li>
+  <li><a href="#userWishlist"><code><span class="http-method">get</span> /user/{userId}/wishlist</code></a></li>
+  </ul>
+
+  <h1><a name="OAuth">OAuth</a></h1>
+  <div class="method"><a name="postOauthToken"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /oauth/token</code></pre></div>
+    <div class="method-summary">Get the Bearer access_token (<span class="nickname">postOauthToken</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#OauthToken">OauthToken</a> (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; OauthToken object request </div>
+
+    </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#OauthBearerAccessToken">OauthBearerAccessToken</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "access_token" : "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjQzZjI5ZjA4MDJiMGRlNmYwMjU2NGFhMWYwMmVjNDMwMTQ0ZDUzYzA0YWY3ZTFjYjE0NTkwZDBhODU5MTRmNDBkMWExMzMyMTk0YmIwMGRkIn0.eyJhdWQiOiIxIiwianRpIjoiNDNmMjlmMDgwMmIwZGU2ZjAyNTY0YWExZjAyZWM0MzAxNDRkNTNjMDRhZjdlMWNiMTQ1OTBkMGE4NTkxNGY0MGQxYTEzMzIxOTRiYjAwZGQiLCJpYXQiOjE1MDM5ODI5NjMsIm5iZiI6MTUwMzk4Mjk2MywiZXhwIjoxNTM1NTE4OTYzLCJzdWIiOiIiLCJzY29wZXMiOltdfQ.cJNvFz8VmtO_VU-R3wAagiDb-PoRKF0njtovpKsvSMpYeMls_v7EFl0P-J0jY0FXRos9BzFR2l3IP8tw2s4aQK5RuGeeMwAfUM8bsA5ShuAIdlP8KBzL4HemgwHplwudxGS_foMqZr8SXt9ps5rADf4FmpHouwESYbClXqTUXRl3wsmeOXYEGDBX2v_DR72rGTVHIX3Gr-ntEf3-r-RTFsSPDWN0SKCkK6fvT8Yw3z83sCrhamkmzq5-7MTZmeUDsrEmdYmHPsNIbnbP2g14pjh9vunOXh1pLw1GoYdvWXncBnoKe8ipkZZpjZ8J2LPe2LjZLMnjfTi0UjvO77yOs5R-dQ-lYmNtcgFQIfvkVckZeyHQQ8CQC78jbeX1iAiGJWSL2JcpEI9rlO_4I9VvWHEZWrFTnVg2bA51FmtLzyx31sz-k4oP5ASJPpC4BIrW0tllZvAXuPklTcNnToPWucUYNnh_LnOHONY3AfGkToNoxZSmcGPUVSOJF62mfIZ6U61dmUDu1TuB_4_HLdRNLOIYiAjGpUykbAckxFgOSITl1eYQEDMewdMSBbMDdy15Xox1ivfNMcjPwaP5Dp3Yv5fwuXzSy70bs2AElxmo4Sq3oL7IEZXESIRQDer4qWQTPMzT2ckgYT5tLA_vFW6g-g4TRjarGyvkzlelisObPMM",
+  "token_type" : "Bearer",
+  "expires_in" : 31536000
+}</code></pre>
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Success
+        <a href="#OauthBearerAccessToken">OauthBearerAccessToken</a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="User">User</a></h1>
+  <div class="method"><a name="addUser"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /user</code></pre></div>
+    <div class="method-summary">Add a new user (<span class="nickname">addUser</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#User">User</a> (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; User object that needs to be added </div>
+
+    </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#SuccessUserCreated">SuccessUserCreated</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "code" : 200,
+  "data" : {
+    "user" : {
+      "city" : "aeiou",
+      "agents_id" : "aeiou",
+      "user_name" : "aeiou",
+      "last_ip_address_used" : "aeiou",
+      "account_status" : "aeiou",
+      "title" : "aeiou",
+      "contact_email" : "aeiou",
+      "lname" : "aeiou",
+      "password" : "aeiou",
+      "countries_id" : "aeiou",
+      "learned_about_walks" : "aeiou",
+      "id" : 0,
+      "state" : "aeiou",
+      "email" : "aeiou",
+      "zip" : "aeiou",
+      "cookie_auth" : "aeiou",
+      "fname" : "aeiou",
+      "address" : "aeiou",
+      "last_time_logged_in" : "aeiou",
+      "home_number" : "aeiou",
+      "audience_reward" : "aeiou",
+      "facebook_id" : "aeiou",
+      "is_subscribed" : "aeiou",
+      "last_purchase_date" : "aeiou",
+      "guest" : "aeiou",
+      "mobile_number" : "aeiou"
+    }
+  },
+  "message" : "recovered|created"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Success
+        <a href="#SuccessUserCreated">SuccessUserCreated</a>
+    <h4 class="field-label">401</h4>
+    Unauthorized
+        <a href="#Error">Error</a>
+    <h4 class="field-label">405</h4>
+    Input was missing the userId or other body field required, see data field for more specific information
+        <a href="#ErrorValidation">ErrorValidation</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="addUserDestination"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /user/{userId}/destination</code></pre></div>
+    <div class="method-summary">Add to users destination list (<span class="nickname">addUserDestination</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">userId (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of user to append destination format: int64</div>
+    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#Destination">Destination</a> (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; destination object that needs to be added </div>
+
+    </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        <a href="#"></a>
+    <h4 class="field-label">400</h4>
+    Invalid userId supplied
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="addUserSocialProvider"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /user/{userId}/social</code></pre></div>
+    <div class="method-summary">Add to users SocialGraph provider list (<span class="nickname">addUserSocialProvider</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">userId (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of user to append SocialGraph Provider format: int64</div>
+    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#SocialGraph">SocialGraph</a> (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; SocialGraph object that needs to be added </div>
+
+    </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        <a href="#"></a>
+    <h4 class="field-label">400</h4>
+    Invalid userId supplied
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="addUserTraveler"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /user/{userId}/traveler</code></pre></div>
+    <div class="method-summary">Add to users traveler list (<span class="nickname">addUserTraveler</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">userId (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of user to append traveler format: int64</div>
+    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#Traveler">Traveler</a> (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; traveler object that needs to be added </div>
+
+    </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        <a href="#"></a>
+    <h4 class="field-label">400</h4>
+    Invalid userId supplied
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="addUserWishlist"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /user/{userId}/wishlist</code></pre></div>
+    <div class="method-summary">Add to users Wishlist of events (<span class="nickname">addUserWishlist</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">userId (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of user to append Wishlist format: int64</div>
+    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#UserTours">UserTours</a> (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; Wishlist object that needs to be added </div>
+
+    </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        <a href="#"></a>
+    <h4 class="field-label">400</h4>
+    Invalid userId supplied
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="deleteUser"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /user/{userId}</code></pre></div>
+    <div class="method-summary">Delete a user (<span class="nickname">deleteUser</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">userId (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; User id to delete format: int64</div>
+    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#Success">Success</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "code" : "aeiou",
+  "data" : "aeiou",
+  "message" : "aeiou"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Success
+        <a href="#Success">Success</a>
+    <h4 class="field-label">401</h4>
+    Unauthorized
+        <a href="#Error">Error</a>
+    <h4 class="field-label">405</h4>
+    Input was missing the userId or other body field required, see data field for more specific information
+        <a href="#ErrorValidation">ErrorValidation</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="deleteUserDestination"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /user/{userId}/destination</code></pre></div>
+    <div class="method-summary">Deletes a destination (<span class="nickname">deleteUserDestination</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">userId (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; User id to manipulate format: int64</div>
+    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#Destination">Destination</a> (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; Destination object that needs to be deleted </div>
+
+    </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        <a href="#"></a>
+    <h4 class="field-label">400</h4>
+    Invalid userId supplied
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="deleteUserSocialProvider"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /user/{userId}/social</code></pre></div>
+    <div class="method-summary">Deletes a social provider (<span class="nickname">deleteUserSocialProvider</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">userId (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; User id to manipulate format: int64</div>
+    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#SocialGraph">SocialGraph</a> (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; SocialGraph object that needs to be added </div>
+
+    </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        <a href="#"></a>
+    <h4 class="field-label">400</h4>
+    Invalid userId supplied
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="deleteUserTraveler"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /user/{userId}/traveler</code></pre></div>
+    <div class="method-summary">Deletes a traveler (<span class="nickname">deleteUserTraveler</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">userId (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; User id to manipulate format: int64</div>
+    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#Traveler">Traveler</a> (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; Traveler object that needs to be deleted </div>
+
+    </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        <a href="#"></a>
+    <h4 class="field-label">400</h4>
+    Invalid userId supplied
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="deleteWishlistItem"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /user/{userId}/wishlist</code></pre></div>
+    <div class="method-summary">Deletes a wishlist item (<span class="nickname">deleteWishlistItem</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">userId (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; User id to manipulate format: int64</div>
+    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#UserTours">UserTours</a> (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; Wishlist object that needs to be deleted </div>
+
+    </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        <a href="#"></a>
+    <h4 class="field-label">400</h4>
+    Invalid userId supplied
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getUserById"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /user/{userId}</code></pre></div>
+    <div class="method-summary">Find user by userId (<span class="nickname">getUserById</span>)</div>
+    <div class="method-notes">Returns a single user</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">userId (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; userId of user to return format: int64</div>
+    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#SuccessUserUpdated">SuccessUserUpdated</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "code" : 200,
+  "data" : {
+    "user" : {
+      "city" : "aeiou",
+      "agents_id" : "aeiou",
+      "user_name" : "aeiou",
+      "last_ip_address_used" : "aeiou",
+      "account_status" : "aeiou",
+      "title" : "aeiou",
+      "contact_email" : "aeiou",
+      "lname" : "aeiou",
+      "password" : "aeiou",
+      "countries_id" : "aeiou",
+      "learned_about_walks" : "aeiou",
+      "id" : 0,
+      "state" : "aeiou",
+      "email" : "aeiou",
+      "zip" : "aeiou",
+      "cookie_auth" : "aeiou",
+      "fname" : "aeiou",
+      "address" : "aeiou",
+      "last_time_logged_in" : "aeiou",
+      "home_number" : "aeiou",
+      "audience_reward" : "aeiou",
+      "facebook_id" : "aeiou",
+      "is_subscribed" : "aeiou",
+      "last_purchase_date" : "aeiou",
+      "guest" : "aeiou",
+      "mobile_number" : "aeiou"
+    }
+  },
+  "message" : "User updated"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Success
+        <a href="#SuccessUserUpdated">SuccessUserUpdated</a>
+    <h4 class="field-label">401</h4>
+    Unauthorized
+        <a href="#Error">Error</a>
+    <h4 class="field-label">405</h4>
+    Input was missing the userId or other body field required, see data field for more specific information
+        <a href="#ErrorValidation">ErrorValidation</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="loginSocialMedia"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /user/login/social</code></pre></div>
+    <div class="method-summary">Login using social id (<span class="nickname">loginSocialMedia</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#SocialGraph">SocialGraph</a> (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; PasswordChange object </div>
+
+    </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        <a href="#"></a>
+    <h4 class="field-label">400</h4>
+    Invalid userId supplied
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="loginUser"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /user/login</code></pre></div>
+    <div class="method-summary">Log user into the system (<span class="nickname">loginUser</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">email (required)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; The user email for login </div><div class="param">password (required)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; The password for login in clear text </div>
+    </div>  <!-- field-items -->
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        <a href="#"></a>
+    <h4 class="field-label">400</h4>
+    Invalid username/password supplied
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="logoutUser"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /user/logout</code></pre></div>
+    <div class="method-summary">Log out current logged in user session (<span class="nickname">logoutUser</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">email (required)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; The user email for login </div>
+    </div>  <!-- field-items -->
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="passwordEmail"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /user/passwordEmail</code></pre></div>
+    <div class="method-summary">Sends password reset email (<span class="nickname">passwordEmail</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#string">string</a> (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; email address to reset </div>
+
+    </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#SuccessUserUpdated">SuccessUserUpdated</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "code" : 200,
+  "data" : {
+    "user" : {
+      "city" : "aeiou",
+      "agents_id" : "aeiou",
+      "user_name" : "aeiou",
+      "last_ip_address_used" : "aeiou",
+      "account_status" : "aeiou",
+      "title" : "aeiou",
+      "contact_email" : "aeiou",
+      "lname" : "aeiou",
+      "password" : "aeiou",
+      "countries_id" : "aeiou",
+      "learned_about_walks" : "aeiou",
+      "id" : 0,
+      "state" : "aeiou",
+      "email" : "aeiou",
+      "zip" : "aeiou",
+      "cookie_auth" : "aeiou",
+      "fname" : "aeiou",
+      "address" : "aeiou",
+      "last_time_logged_in" : "aeiou",
+      "home_number" : "aeiou",
+      "audience_reward" : "aeiou",
+      "facebook_id" : "aeiou",
+      "is_subscribed" : "aeiou",
+      "last_purchase_date" : "aeiou",
+      "guest" : "aeiou",
+      "mobile_number" : "aeiou"
+    }
+  },
+  "message" : "User updated"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Success
+        <a href="#SuccessUserUpdated">SuccessUserUpdated</a>
+    <h4 class="field-label">401</h4>
+    Unauthorized
+        <a href="#Error">Error</a>
+    <h4 class="field-label">405</h4>
+    Input was missing the userId or other body field required, see data field for more specific information
+        <a href="#ErrorValidation">ErrorValidation</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="passwordReset"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /user/{userId}/passwordReset</code></pre></div>
+    <div class="method-summary">User password reset (<span class="nickname">passwordReset</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">userId (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of user to fetch format: int64</div>
+    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#PasswordReset">PasswordReset</a> (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; User object password reset </div>
+
+    </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#SuccessUserUpdated">SuccessUserUpdated</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "code" : 200,
+  "data" : {
+    "user" : {
+      "city" : "aeiou",
+      "agents_id" : "aeiou",
+      "user_name" : "aeiou",
+      "last_ip_address_used" : "aeiou",
+      "account_status" : "aeiou",
+      "title" : "aeiou",
+      "contact_email" : "aeiou",
+      "lname" : "aeiou",
+      "password" : "aeiou",
+      "countries_id" : "aeiou",
+      "learned_about_walks" : "aeiou",
+      "id" : 0,
+      "state" : "aeiou",
+      "email" : "aeiou",
+      "zip" : "aeiou",
+      "cookie_auth" : "aeiou",
+      "fname" : "aeiou",
+      "address" : "aeiou",
+      "last_time_logged_in" : "aeiou",
+      "home_number" : "aeiou",
+      "audience_reward" : "aeiou",
+      "facebook_id" : "aeiou",
+      "is_subscribed" : "aeiou",
+      "last_purchase_date" : "aeiou",
+      "guest" : "aeiou",
+      "mobile_number" : "aeiou"
+    }
+  },
+  "message" : "User updated"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Success
+        <a href="#SuccessUserUpdated">SuccessUserUpdated</a>
+    <h4 class="field-label">401</h4>
+    Unauthorized
+        <a href="#Error">Error</a>
+    <h4 class="field-label">405</h4>
+    Input was missing the userId or other body field required, see data field for more specific information
+        <a href="#ErrorValidation">ErrorValidation</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="updateUser"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /user/{userId}</code></pre></div>
+    <div class="method-summary">Update a user (<span class="nickname">updateUser</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">userId (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; userId object that needs to be updated format: int64</div>
+    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#User">User</a> (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; User object that needs to be added </div>
+
+    </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#SuccessUserUpdated">SuccessUserUpdated</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "code" : 200,
+  "data" : {
+    "user" : {
+      "city" : "aeiou",
+      "agents_id" : "aeiou",
+      "user_name" : "aeiou",
+      "last_ip_address_used" : "aeiou",
+      "account_status" : "aeiou",
+      "title" : "aeiou",
+      "contact_email" : "aeiou",
+      "lname" : "aeiou",
+      "password" : "aeiou",
+      "countries_id" : "aeiou",
+      "learned_about_walks" : "aeiou",
+      "id" : 0,
+      "state" : "aeiou",
+      "email" : "aeiou",
+      "zip" : "aeiou",
+      "cookie_auth" : "aeiou",
+      "fname" : "aeiou",
+      "address" : "aeiou",
+      "last_time_logged_in" : "aeiou",
+      "home_number" : "aeiou",
+      "audience_reward" : "aeiou",
+      "facebook_id" : "aeiou",
+      "is_subscribed" : "aeiou",
+      "last_purchase_date" : "aeiou",
+      "guest" : "aeiou",
+      "mobile_number" : "aeiou"
+    }
+  },
+  "message" : "User updated"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Success
+        <a href="#SuccessUserUpdated">SuccessUserUpdated</a>
+    <h4 class="field-label">401</h4>
+    Unauthorized
+        <a href="#Error">Error</a>
+    <h4 class="field-label">405</h4>
+    Input was missing the userId or other body field required, see data field for more specific information
+        <a href="#ErrorValidation">ErrorValidation</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="userBookingCancel"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /user/{userId}/booking/cancel</code></pre></div>
+    <div class="method-summary">Request a booking cancel (<span class="nickname">userBookingCancel</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">userId (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of user format: int64</div>
+    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#BookingCancel">BookingCancel</a> (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; booking object that needs to be canceled </div>
+
+    </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        <a href="#"></a>
+    <h4 class="field-label">400</h4>
+    Invalid userId supplied
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="userDestination"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /user/{userId}/destination</code></pre></div>
+    <div class="method-summary">Get user destination list (<span class="nickname">userDestination</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">userId (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of user to fetch format: int64</div>
+    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#Destination">Destination</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "city" : "aeiou",
+  "endDate" : "aeiou",
+  "hotel" : "aeiou",
+  "hotelPhone" : "aeiou",
+  "id" : 0,
+  "email" : "aeiou",
+  "startDate" : "aeiou"
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        
+    <h4 class="field-label">400</h4>
+    Invalid userId supplied
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="userPasswordChange"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /user/{userId}/password/change</code></pre></div>
+    <div class="method-summary">Change user password (<span class="nickname">userPasswordChange</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">userId (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of user to append Wishlist format: int64</div>
+    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#PasswordChange">PasswordChange</a> (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; PasswordChange object </div>
+
+    </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        <a href="#"></a>
+    <h4 class="field-label">400</h4>
+    Invalid userId supplied
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="userSocial"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /user/{userId}/social</code></pre></div>
+    <div class="method-summary">Get user social graph (<span class="nickname">userSocial</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">userId (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of user to fetch format: int64</div>
+    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#SuccessSocialGet">SuccessSocialGet</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "code" : 200,
+  "data" : {
+    "socialProviders" : [ {
+      "socialUserId" : "aeiou",
+      "metadata" : "aeiou",
+      "provider" : "aeiou"
+    } ]
+  },
+  "message" : ""
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Success
+        <a href="#SuccessSocialGet">SuccessSocialGet</a>
+    <h4 class="field-label">401</h4>
+    Unauthorized
+        <a href="#Error">Error</a>
+    <h4 class="field-label">405</h4>
+    Input was missing the userId or other body field required, see data field for more specific information
+        <a href="#ErrorValidation">ErrorValidation</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="userTourlist"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /user/{userId}/tourlist</code></pre></div>
+    <div class="method-summary">Get list of past and future tours (<span class="nickname">userTourlist</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">userId (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of user to fetch format: int64</div>
+    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#UserTours">UserTours</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "image" : "aeiou",
+  "tourInfoLink" : "aeiou",
+  "tourId" : 0,
+  "price" : "aeiou",
+  "name" : "aeiou",
+  "description" : "aeiou",
+  "tourDateTime" : "aeiou",
+  "tourStatus" : "aeiou",
+  "tourServiceLink" : "aeiou"
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        
+    <h4 class="field-label">400</h4>
+    Invalid userId supplied
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="userTraveler"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /user/{userId}/traveler</code></pre></div>
+    <div class="method-summary">Get user traveler list (<span class="nickname">userTraveler</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">userId (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of user to fetch format: int64</div>
+    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#Traveler">Traveler</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "fname" : "aeiou",
+  "lname" : "aeiou",
+  "password" : "aeiou",
+  "phone" : "aeiou",
+  "id" : 0,
+  "email" : "aeiou",
+  "username" : "aeiou"
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        
+    <h4 class="field-label">400</h4>
+    Invalid userId supplied
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="userWishlist"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /user/{userId}/wishlist</code></pre></div>
+    <div class="method-summary">Get user wishlist of events (<span class="nickname">userWishlist</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">userId (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of user to fetch format: int64</div>
+    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#UserTours">UserTours</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "image" : "aeiou",
+  "tourInfoLink" : "aeiou",
+  "tourId" : 0,
+  "price" : "aeiou",
+  "name" : "aeiou",
+  "description" : "aeiou",
+  "tourDateTime" : "aeiou",
+  "tourStatus" : "aeiou",
+  "tourServiceLink" : "aeiou"
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        
+    <h4 class="field-label">400</h4>
+    Invalid userId supplied
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+
+  <h2><a name="__Models">Models</a></h2>
+  [ Jump to <a href="#__Methods">Methods</a> ]
+
+  <h3>Table of Contents</h3>
+  <ol>
+    <li><a href="#BookingCancel"><code>BookingCancel</code> - </a></li>
+    <li><a href="#Destination"><code>Destination</code> - </a></li>
+    <li><a href="#Error"><code>Error</code> - </a></li>
+    <li><a href="#ErrorValidation"><code>ErrorValidation</code> - </a></li>
+    <li><a href="#OauthBearerAccessToken"><code>OauthBearerAccessToken</code> - </a></li>
+    <li><a href="#OauthToken"><code>OauthToken</code> - </a></li>
+    <li><a href="#PasswordChange"><code>PasswordChange</code> - </a></li>
+    <li><a href="#PasswordReset"><code>PasswordReset</code> - </a></li>
+    <li><a href="#SocialGraph"><code>SocialGraph</code> - </a></li>
+    <li><a href="#Success"><code>Success</code> - </a></li>
+    <li><a href="#SuccessSocialGet"><code>SuccessSocialGet</code> - </a></li>
+    <li><a href="#SuccessSocialGet_data"><code>SuccessSocialGet_data</code> - </a></li>
+    <li><a href="#SuccessUserCreated"><code>SuccessUserCreated</code> - </a></li>
+    <li><a href="#SuccessUserCreated_data"><code>SuccessUserCreated_data</code> - </a></li>
+    <li><a href="#SuccessUserGet"><code>SuccessUserGet</code> - </a></li>
+    <li><a href="#SuccessUserUpdated"><code>SuccessUserUpdated</code> - </a></li>
+    <li><a href="#Traveler"><code>Traveler</code> - </a></li>
+    <li><a href="#User"><code>User</code> - </a></li>
+    <li><a href="#UserTours"><code>UserTours</code> - </a></li>
+  </ol>
+
+  <div class="model">
+    <h3><a name="BookingCancel"><code>BookingCancel</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">bookingDetailsId </div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span>  format: int64</div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Destination"><code>Destination</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">id (optional)</div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span>  format: int64</div>
+<div class="param">city </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">hotel (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">hotelPhone (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">email (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">startDate (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">endDate (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Error"><code>Error</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">code </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">message </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="ErrorValidation"><code>ErrorValidation</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">code </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">data (optional)</div><div class="param-desc"><span class="param-type"><a href="#">array[null]</a></span>  </div>
+<div class="param">message </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="OauthBearerAccessToken"><code>OauthBearerAccessToken</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">token_type </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">expires_in </div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  </div>
+<div class="param">access_token </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="OauthToken"><code>OauthToken</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">grant_type </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">client_id </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">client_secret </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">scope </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="PasswordChange"><code>PasswordChange</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">passwordCurrent (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">passwordNew (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">passwordNewVerify (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="PasswordReset"><code>PasswordReset</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">passwordKey </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">newPassword </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="SocialGraph"><code>SocialGraph</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">provider </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">socialUserId </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">metadata (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Success"><code>Success</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">code </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">data (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">message </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="SuccessSocialGet"><code>SuccessSocialGet</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">code </div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  format: int32</div>
+<div class="param">data (optional)</div><div class="param-desc"><span class="param-type"><a href="#SuccessSocialGet_data">SuccessSocialGet_data</a></span>  </div>
+<div class="param">message </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="SuccessSocialGet_data"><code>SuccessSocialGet_data</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">socialProviders (optional)</div><div class="param-desc"><span class="param-type"><a href="#SocialGraph">array[SocialGraph]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="SuccessUserCreated"><code>SuccessUserCreated</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">code </div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  format: int32</div>
+<div class="param">data (optional)</div><div class="param-desc"><span class="param-type"><a href="#SuccessUserCreated_data">SuccessUserCreated_data</a></span>  </div>
+<div class="param">message </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="SuccessUserCreated_data"><code>SuccessUserCreated_data</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">user (optional)</div><div class="param-desc"><span class="param-type"><a href="#User">User</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="SuccessUserGet"><code>SuccessUserGet</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">code </div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  format: int32</div>
+<div class="param">data (optional)</div><div class="param-desc"><span class="param-type"><a href="#SuccessUserCreated_data">SuccessUserCreated_data</a></span>  </div>
+<div class="param">message </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="SuccessUserUpdated"><code>SuccessUserUpdated</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">code </div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  format: int32</div>
+<div class="param">data (optional)</div><div class="param-desc"><span class="param-type"><a href="#SuccessUserCreated_data">SuccessUserCreated_data</a></span>  </div>
+<div class="param">message </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Traveler"><code>Traveler</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">id (optional)</div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span>  format: int64</div>
+<div class="param">username (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">fname </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">lname </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">email </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">password (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">phone (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="User"><code>User</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">id (optional)</div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span>  format: int64</div>
+<div class="param">user_name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">fname (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">lname (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">email </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">password (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">address (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">city (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">state (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">zip (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">countries_id (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">mobile_number (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">home_number (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">title (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">account_status (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">learned_about_walks (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">is_subscribed (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">last_time_logged_in (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">last_ip_address_used (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">last_purchase_date (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">agents_id (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">cookie_auth (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">facebook_id (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">contact_email (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">guest (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">audience_reward (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="UserTours"><code>UserTours</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">tourId (optional)</div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span>  format: int64</div>
+<div class="param">tourDateTime (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">description (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">price (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">image (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">tourInfoLink (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">tourServiceLink (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">tourStatus (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  </body>
+</html>

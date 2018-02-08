@@ -1,0 +1,958 @@
+{
+	"variables": [],
+	"info": {
+		"name": "#367 - Beta User Profile API : Implementation",
+		"_postman_id": "04623a82-e39f-5358-0eaf-177ad8aea85f",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/v1/oauth/token (client_credentials)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"console.log(\"rx access_token: \" + jsonData.access_token);",
+							"postman.setEnvironmentVariable(\"access_token\", jsonData.access_token);"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://{{hostStage}}-userapi.walks.org/v1/oauth/token",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "1",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "{{client_secret}}",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "*",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/v1/docs/swagger",
+			"request": {
+				"url": "http://{{hostStage}}-userapi.walks.org/v1/docs/swagger",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer  {{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/v1/docs/html",
+			"request": {
+				"url": "http://{{hostStage}}-userapi.walks.org/v1/docs/html",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer  {{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/v1/docs/postman",
+			"request": {
+				"url": "http://{{hostStage}}-userapi.walks.org/v1/docs/postman",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer  {{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/v1/apiuser (create)",
+			"request": {
+				"url": "http://{{hostStage}}-userapi.walks.org/v1/apiusers",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"api_user_internal\",\n  \"email\": \"admins@walks.org\",\n  \"password\": \"walksabouttown\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/v1/oauth/token (password)",
+			"request": {
+				"url": "http://{{hostStage}}-userapi.walks.org/v1/oauth/token",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "{{client_secret}}",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "api_user_internal",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "walksabouttown",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/v1/user/{userId}",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"console.log(\"rx user id: \" + jsonData.data.user.id);",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://{{hostStage}}-userapi.walks.org/v1/user/{{userId}}",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer  {{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/v1/user/{userId} (update user)",
+			"request": {
+				"url": "http://{{hostStage}}-userapi.walks.org/v1/user/{{userId}}",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer  {{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"fname\": \"Phillip\",\n  \"lname\": \"HAwkins-UserAPITest\",\n  \"password\": \"{{password}}\",\n  \"address\": \"125 cat town\"  \n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/v1/user/{userId} (update user - password only)",
+			"request": {
+				"url": "http://{{hostStage}}-userapi.walks.org/v1/user/{{userId}}",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer  {{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"password\": \"123456\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/v1/user/{userId}",
+			"request": {
+				"url": "http://{{hostStage}}-userapi.walks.org/v1/user/{{userId}}",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer  {{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/v1/user (create)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"console.log(\"rx user id: \" + jsonData.data.user.id);",
+							"postman.setEnvironmentVariable(\"userId\", jsonData.data.user.id);"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://{{hostStage}}-userapi.walks.org/v1/user",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer  {{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"{{email}}\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/v1/user/login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"console.log(\"rx user id: \" + jsonData.data.user.id);",
+							"postman.setEnvironmentVariable(\"userId\", jsonData.data.user.id);"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": {
+					"raw": "http://{{hostStage}}-userapi.walks.org/v1/user/login?email={{email}}&password={{password}}",
+					"protocol": "http",
+					"host": [
+						"{{hostStage}}-userapi",
+						"walks",
+						"org"
+					],
+					"path": [
+						"v1",
+						"user",
+						"login"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "{{email}}",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "password",
+							"value": "{{password}}",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer  {{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"UzerAPI\",\n  \"firstName\": \"User\",\n  \"lastName\": \"API\",\n  \"email\": \"userapi6@test.com\",\n  \"password\": \"123456\",\n  \"address\": \"123 cat town\"  \n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/v1/user/login/social",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"console.log(\"rx user id: \" + jsonData.data.user.id);",
+							"postman.setEnvironmentVariable(\"userId\", jsonData.data.user.id);"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://{{hostStage}}-userapi.walks.org/v1/user/login/social",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer  {{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"provider\": \"FriendFace\",\n  \"socialUserId\": \"SusanSmith4655\"\n}\n\n"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/v1/user/password/change",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"console.log(\"rx user id: \" + jsonData.data.user.id);",
+							"postman.setEnvironmentVariable(\"userId\", jsonData.data.user.id);"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://{{hostStage}}-userapi.walks.org/v1/user/{{userId}}/password/change",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer  {{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"passwordCurrent\": \"345679\",\n  \"passwordNew\": \"345679\",\n  \"passwordNewVerify\": \"345679\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/v1/user/logout",
+			"request": {
+				"url": {
+					"raw": "http://{{hostStage}}-userapi.walks.org/v1/user/logout?email={{email}}",
+					"protocol": "http",
+					"host": [
+						"{{hostStage}}-userapi",
+						"walks",
+						"org"
+					],
+					"path": [
+						"v1",
+						"user",
+						"logout"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "{{email}}",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer  {{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"UzerAPI\",\n  \"firstName\": \"User\",\n  \"lastName\": \"API\",\n  \"email\": \"userapi6@test.com\",\n  \"password\": \"123456\",\n  \"address\": \"123 cat town\"  \n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/v1/user/passwordEmail",
+			"request": {
+				"url": {
+					"raw": "http://{{hostStage}}-userapi.walks.org/v1/user/passwordEmail?email={{email}}",
+					"protocol": "http",
+					"host": [
+						"{{hostStage}}-userapi",
+						"walks",
+						"org"
+					],
+					"path": [
+						"v1",
+						"user",
+						"passwordEmail"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "{{email}}",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer  {{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"userapi6@test.com\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/v1/user/{userId}/destination",
+			"request": {
+				"url": "http://{{hostStage}}-userapi.walks.org/v1/user/{{userId}}/destination",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer  {{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"city\": \"Auckland\",\n  \"hotel\": \"Cats Paw Inn\",\n  \"hotelPhone\": \"5120349457\",\n  \"hotelEmail\": \"meow@catspaw.com\",\n  \"startDate\": \"2017-11-09 05:53:58\",\n  \"endDate\": \"2017-12-09 05:53:58\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/v1/user/{userId}/destination",
+			"request": {
+				"url": "http://{{hostStage}}-userapi.walks.org/v1/user/{{userId}}/destination",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer  {{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"city\": \"Auckland\",\n  \"hotel\": \"Cats Paw Inn Annex\",\n  \"hotelPhone\": \"5120349457\",\n  \"hotelEmail\": \"meow@catspaw.com\",\n  \"startDate\": \"2017-11-09 05:53:58\",\n  \"endDate\": \"2017-12-09 05:53:58\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/v1/user/{userId}/destination",
+			"request": {
+				"url": "http://{{hostStage}}-userapi.walks.org/v1/user/{{userId}}/destination",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer  {{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"destinationId\": \"2\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/v1/user/{userId}/social",
+			"request": {
+				"url": "http://{{hostStage}}-userapi.walks.org/v1/user/{{userId}}/social",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer  {{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"socialProviderId\": \"6\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/v1/user/{userId}/social (create)",
+			"request": {
+				"url": "http://{{hostStage}}-userapi.walks.org/v1/user/{{userId}}/social",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer  {{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"provider\": \"FriendFace\",\n  \"socialUserId\": \"SusanSmith4655\",\n  \"email\": \"\",\n  \"metadata\": \"\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/v1/user/{userId}/social",
+			"request": {
+				"url": "http://{{hostStage}}-userapi.walks.org/v1/user/{{userId}}/social",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer  {{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"socialProviderId\": \"6\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/v1/user/{userId}/tourlist",
+			"request": {
+				"url": "http://{{hostStage}}-userapi.walks.org/v1/user/152880/tourlist",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer  {{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"socialProviderId\": \"6\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/v1/user/{userId}/traveler",
+			"request": {
+				"url": "http://{{hostStage}}-userapi.walks.org/v1/user/{{userId}}/traveler",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer  {{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"travelerClientId\": \"6\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/v1/user/{userId}/traveler",
+			"request": {
+				"url": "http://{{hostStage}}-userapi.walks.org/v1/user/{{userId}}/traveler",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer  {{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"Busker2000\",\n  \"fname\": \"Friendof\",\n  \"lname\": \"APIclient\",\n  \"email\": \"apiclienttraveler345@test.com\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/v1/user/{userId}/traveler",
+			"request": {
+				"url": "http://{{hostStage}}-userapi.walks.org/v1/user/{{userId}}/traveler",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer  {{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"travelerClientId\": \"366951\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/v1/user/{userId}/wishlist",
+			"request": {
+				"url": "http://{{hostStage}}-userapi.walks.org/v1/user/{{userId}}/wishlist",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer  {{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"events_id\": \"9\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/v1/user/{userId}/wishlist",
+			"request": {
+				"url": "http://{{hostStage}}-userapi.walks.org/v1/user/{{userId}}/wishlist",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer  {{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"events_id\": \"9\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/v1/user/{userId}/wishlist",
+			"request": {
+				"url": "http://{{hostStage}}-userapi.walks.org/v1/user/{{userId}}/wishlist",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer  {{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"events_id\": \"9\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/v1/user/{userId}/booking/cancel",
+			"request": {
+				"url": "http://{{hostStage}}-userapi.walks.org/v1/user/{{userId}}/booking/cancel",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer  {{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"bookingDetailsId\": 246729\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/v1/user/{userId}/password/change",
+			"request": {
+				"url": "http://{{hostStage}}-userapi.walks.org/v1/user/{{userId}}/password/change",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer  {{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"passwordCurrent\": \"123456\",\n\t\"passwordNew\": \"catAttack21\",\n\t\"passwordNewVerify\": \"catAttack21\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/v1/user/{userId}/bookings/notify (email itinerary)",
+			"request": {
+				"url": "http://{{hostStage}}-userapi.walks.org/v1/user/{{userId}}/message",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer  {{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"bookingId\": 18897259,\n\t\"templateName\": \"emailItinerary-TW\",\n\t\"recipientsList\": [\"account@email.org\"]\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

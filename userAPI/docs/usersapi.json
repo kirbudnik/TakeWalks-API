@@ -1,0 +1,1452 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": ".",
+    "version": "1.0.0",
+    "title": "Walks User API",
+    "contact": {
+      "email": "admins@walks.org"
+    }
+  },
+  "host": "local-userapi.walks.org",
+  "basePath": "/v1",
+  "tags": [
+    {
+      "name": "user",
+      "description": "Operations on users"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/oauth/token": {
+      "post": {
+        "tags": [
+          "OAuth"
+        ],
+        "summary": "Get the Bearer access_token",
+        "description": "",
+        "operationId": "postOauthToken",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "OauthToken object request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OauthToken"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/SuccessOauthBearerAccessToken"
+          }
+        }
+      }
+    },
+    "/user": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Add a new user",
+        "description": "",
+        "operationId": "addUser",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User object that needs to be added",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/SuccessUserCreated"
+          },
+          "401": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "405": {
+            "$ref": "#/responses/InvalidInput"
+          }
+        }
+      }
+    },
+    "/user/{userId}": {
+      "get": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "user"
+        ],
+        "summary": "Find user by userId",
+        "description": "Returns a single user",
+        "operationId": "getUserById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "userId of user to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/SuccessUserUpdated"
+          },
+          "401": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "405": {
+            "$ref": "#/responses/InvalidInput"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Update a user",
+        "description": "",
+        "operationId": "updateUser",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "userId object that needs to be updated",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User object that needs to be added",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/SuccessUserUpdated"
+          },
+          "401": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "405": {
+            "$ref": "#/responses/InvalidInput"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Delete a user",
+        "description": "",
+        "operationId": "deleteUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "User id to delete",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/Success"
+          },
+          "401": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "405": {
+            "$ref": "#/responses/InvalidInput"
+          }
+        }
+      }
+    },
+    "/user/login": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Log user into the system",
+        "description": "",
+        "operationId": "loginUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "description": "The user email for login",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "description": "The password for login in clear text",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid username/password supplied"
+          }
+        }
+      }
+    },
+    "/user/logout": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Log out current logged in user session",
+        "description": "",
+        "operationId": "logoutUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "description": "The user email for login",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/user/passwordEmail": {
+      "put": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Sends password reset email",
+        "description": "",
+        "operationId": "passwordEmail",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "email address to reset",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "email"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/SuccessUserUpdated"
+          },
+          "401": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "405": {
+            "$ref": "#/responses/InvalidInput"
+          }
+        }
+      }
+    },
+    "/user/{userId}/passwordReset": {
+      "put": {
+        "tags": [
+          "user"
+        ],
+        "summary": "User password reset",
+        "description": "",
+        "operationId": "passwordReset",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "ID of user to fetch",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User object password reset",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PasswordReset"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/SuccessUserUpdated"
+          },
+          "401": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "405": {
+            "$ref": "#/responses/InvalidInput"
+          }
+        }
+      }
+    },
+    "/user/{userId}/password/change": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Change user password",
+        "description": "",
+        "operationId": "userPasswordChange",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "ID of user to append Wishlist",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "PasswordChange object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PasswordChange"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid userId supplied"
+          }
+        }
+      }
+    },
+    "/user/login/social": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Login using social id",
+        "description": "",
+        "operationId": "loginSocialMedia",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "PasswordChange object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SocialGraph"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid userId supplied"
+          }
+        }
+      }
+    },
+    "/user/{userId}/social": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Get user social graph",
+        "description": "",
+        "operationId": "userSocial",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "ID of user to fetch",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/SuccessSocialGet"
+          },
+          "401": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "405": {
+            "$ref": "#/responses/InvalidInput"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Add to users SocialGraph provider list",
+        "description": "",
+        "operationId": "addUserSocialProvider",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "ID of user to append SocialGraph Provider",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "SocialGraph object that needs to be added",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SocialGraph"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid userId supplied"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Deletes a social provider",
+        "description": "",
+        "operationId": "deleteUserSocialProvider",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "User id to manipulate",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "SocialGraph object that needs to be added",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SocialGraph"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid userId supplied"
+          }
+        }
+      }
+    },
+    "/user/{userId}/destination": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Get user destination list",
+        "description": "",
+        "operationId": "userDestination",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "ID of user to fetch",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Destination"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid userId supplied"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Add to users destination list",
+        "description": "",
+        "operationId": "addUserDestination",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "ID of user to append destination ",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "destination object that needs to be added",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Destination"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid userId supplied"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Deletes a destination",
+        "description": "",
+        "operationId": "deleteUserDestination",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "User id to manipulate",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Destination object that needs to be deleted",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Destination"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid userId supplied"
+          }
+        }
+      }
+    },
+    "/user/{userId}/traveler": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Get user traveler list",
+        "description": "",
+        "operationId": "userTraveler",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "ID of user to fetch",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Traveler"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid userId supplied"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Add to users traveler list",
+        "description": "",
+        "operationId": "addUserTraveler",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "ID of user to append traveler",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "traveler object that needs to be added",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Traveler"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid userId supplied"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Deletes a traveler",
+        "description": "",
+        "operationId": "deleteUserTraveler",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "User id to manipulate",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Traveler object that needs to be deleted",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Traveler"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid userId supplied"
+          }
+        }
+      }
+    },
+    "/user/{userId}/wishlist": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Get user wishlist of events",
+        "description": "",
+        "operationId": "userWishlist",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "ID of user to fetch",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/UserTours"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid userId supplied"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Add to users Wishlist of events",
+        "description": "",
+        "operationId": "addUserWishlist",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "ID of user to append Wishlist",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Wishlist object that needs to be added",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserTours"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid userId supplied"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Deletes a wishlist item",
+        "description": "",
+        "operationId": "deleteWishlistItem",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "User id to manipulate",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Wishlist object that needs to be deleted",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserTours"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid userId supplied"
+          }
+        }
+      }
+    },
+    "/user/{userId}/tourlist": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Get list of past and future tours",
+        "description": "",
+        "operationId": "userTourlist",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "ID of user to fetch",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/UserTours"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid userId supplied"
+          }
+        }
+      }
+    },
+    "/user/{userId}/booking/cancel": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Request a booking cancel",
+        "description": "",
+        "operationId": "userBookingCancel",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "ID of user",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "booking object that needs to be canceled",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BookingCancel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid userId supplied"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "Success": {
+      "description": "Success",
+      "schema": {
+        "$ref": "#/definitions/Success"
+      }
+    },
+    "SuccessUserCreated": {
+      "description": "Success",
+      "schema": {
+        "$ref": "#/definitions/SuccessUserCreated"
+      }
+    },
+    "SuccessUserUpdated": {
+      "description": "Success",
+      "schema": {
+        "$ref": "#/definitions/SuccessUserUpdated"
+      }
+    },
+    "SuccessUserGet": {
+      "description": "Success",
+      "schema": {
+        "$ref": "#/definitions/SuccessUserGet"
+      }
+    },
+    "SuccessSocialGet": {
+      "description": "Success",
+      "schema": {
+        "$ref": "#/definitions/SuccessSocialGet"
+      }
+    },
+    "SuccessOauthBearerAccessToken": {
+      "description": "Success",
+      "schema": {
+        "$ref": "#/definitions/OauthBearerAccessToken"
+      }
+    },
+    "Unauthorized": {
+      "description": "Unauthorized",
+      "schema": {
+        "$ref": "#/definitions/Error"
+      }
+    },
+    "InvalidInput": {
+      "description": "Input was missing the userId or other body field required, see data field for more specific information",
+      "schema": {
+        "$ref": "#/definitions/ErrorValidation"
+      }
+    }
+  },
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "User": {
+      "type": "object",
+      "required": [
+        "email"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "user_name": {
+          "type": "string"
+        },
+        "fname": {
+          "type": "string"
+        },
+        "lname": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "zip": {
+          "type": "string"
+        },
+        "countries_id": {
+          "type": "string"
+        },
+        "mobile_number": {
+          "type": "string"
+        },
+        "home_number": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "account_status": {
+          "type": "string"
+        },
+        "learned_about_walks": {
+          "type": "string"
+        },
+        "is_subscribed": {
+          "type": "string"
+        },
+        "last_time_logged_in": {
+          "type": "string"
+        },
+        "last_ip_address_used": {
+          "type": "string"
+        },
+        "last_purchase_date": {
+          "type": "string"
+        },
+        "agents_id": {
+          "type": "string"
+        },
+        "cookie_auth": {
+          "type": "string"
+        },
+        "facebook_id": {
+          "type": "string"
+        },
+        "contact_email": {
+          "type": "string"
+        },
+        "guest": {
+          "type": "string"
+        },
+        "audience_reward": {
+          "type": "string"
+        }
+      }
+    },
+    "PasswordReset": {
+      "type": "object",
+      "required": [
+        "passwordKey",
+        "newPassword"
+      ],
+      "properties": {
+        "passwordKey": {
+          "type": "string"
+        },
+        "newPassword": {
+          "type": "string"
+        }
+      }
+    },
+    "PasswordChange": {
+      "type": "object",
+      "properties": {
+        "passwordCurrent": {
+          "type": "string"
+        },
+        "passwordNew": {
+          "type": "string"
+        },
+        "passwordNewVerify": {
+          "type": "string"
+        }
+      }
+    },
+    "SocialGraph": {
+      "type": "object",
+      "required": [
+        "provider",
+        "socialUserId"
+      ],
+      "properties": {
+        "provider": {
+          "type": "string"
+        },
+        "socialUserId": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "string"
+        }
+      }
+    },
+    "Destination": {
+      "type": "object",
+      "required": [
+        "city"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "city": {
+          "type": "string"
+        },
+        "hotel": {
+          "type": "string"
+        },
+        "hotelPhone": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "startDate": {
+          "type": "string"
+        },
+        "endDate": {
+          "type": "string"
+        }
+      }
+    },
+    "Traveler": {
+      "type": "object",
+      "required": [
+        "fname",
+        "lname",
+        "email"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "username": {
+          "type": "string"
+        },
+        "fname": {
+          "type": "string"
+        },
+        "lname": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        }
+      }
+    },
+    "UserTours": {
+      "type": "object",
+      "properties": {
+        "tourId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "tourDateTime": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "price": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "tourInfoLink": {
+          "type": "string"
+        },
+        "tourServiceLink": {
+          "type": "string"
+        },
+        "tourStatus": {
+          "type": "string"
+        }
+      }
+    },
+    "BookingCancel": {
+      "type": "object",
+      "required": [
+        "bookingDetailsId"
+      ],
+      "properties": {
+        "bookingDetailsId": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "OauthToken": {
+      "type": "object",
+      "required": [
+        "grant_type",
+        "client_id",
+        "client_secret",
+        "scope"
+      ],
+      "properties": {
+        "grant_type": {
+          "type": "string",
+          "example": "client_credentials"
+        },
+        "client_id": {
+          "type": "string",
+          "example": 1
+        },
+        "client_secret": {
+          "type": "string",
+          "example": "oug8G4X5IbD550ib4ST7XyOTF3Z2qdRmjwoSQ1Cq"
+        },
+        "scope": {
+          "type": "string",
+          "example": "*"
+        }
+      }
+    },
+    "OauthBearerAccessToken": {
+      "type": "object",
+      "required": [
+        "token_type",
+        "expires_in",
+        "access_token"
+      ],
+      "properties": {
+        "token_type": {
+          "type": "string",
+          "example": "Bearer"
+        },
+        "expires_in": {
+          "type": "integer",
+          "example": 31536000
+        },
+        "access_token": {
+          "type": "string",
+          "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjQzZjI5ZjA4MDJiMGRlNmYwMjU2NGFhMWYwMmVjNDMwMTQ0ZDUzYzA0YWY3ZTFjYjE0NTkwZDBhODU5MTRmNDBkMWExMzMyMTk0YmIwMGRkIn0.eyJhdWQiOiIxIiwianRpIjoiNDNmMjlmMDgwMmIwZGU2ZjAyNTY0YWExZjAyZWM0MzAxNDRkNTNjMDRhZjdlMWNiMTQ1OTBkMGE4NTkxNGY0MGQxYTEzMzIxOTRiYjAwZGQiLCJpYXQiOjE1MDM5ODI5NjMsIm5iZiI6MTUwMzk4Mjk2MywiZXhwIjoxNTM1NTE4OTYzLCJzdWIiOiIiLCJzY29wZXMiOltdfQ.cJNvFz8VmtO_VU-R3wAagiDb-PoRKF0njtovpKsvSMpYeMls_v7EFl0P-J0jY0FXRos9BzFR2l3IP8tw2s4aQK5RuGeeMwAfUM8bsA5ShuAIdlP8KBzL4HemgwHplwudxGS_foMqZr8SXt9ps5rADf4FmpHouwESYbClXqTUXRl3wsmeOXYEGDBX2v_DR72rGTVHIX3Gr-ntEf3-r-RTFsSPDWN0SKCkK6fvT8Yw3z83sCrhamkmzq5-7MTZmeUDsrEmdYmHPsNIbnbP2g14pjh9vunOXh1pLw1GoYdvWXncBnoKe8ipkZZpjZ8J2LPe2LjZLMnjfTi0UjvO77yOs5R-dQ-lYmNtcgFQIfvkVckZeyHQQ8CQC78jbeX1iAiGJWSL2JcpEI9rlO_4I9VvWHEZWrFTnVg2bA51FmtLzyx31sz-k4oP5ASJPpC4BIrW0tllZvAXuPklTcNnToPWucUYNnh_LnOHONY3AfGkToNoxZSmcGPUVSOJF62mfIZ6U61dmUDu1TuB_4_HLdRNLOIYiAjGpUykbAckxFgOSITl1eYQEDMewdMSBbMDdy15Xox1ivfNMcjPwaP5Dp3Yv5fwuXzSy70bs2AElxmo4Sq3oL7IEZXESIRQDer4qWQTPMzT2ckgYT5tLA_vFW6g-g4TRjarGyvkzlelisObPMM"
+        }
+      }
+    },
+    "Success": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "data": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "SuccessUserCreated": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "example": 200
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "user": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        },
+        "message": {
+          "type": "string",
+          "example": "recovered|created"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "SuccessUserUpdated": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "example": 200
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "user": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        },
+        "message": {
+          "type": "string",
+          "example": "User updated"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "SuccessUserGet": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "example": 200
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "user": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        },
+        "message": {
+          "type": "string",
+          "example": ""
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "SuccessSocialGet": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "example": 200
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "socialProviders": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SocialGraph"
+              }
+            }
+          }
+        },
+        "message": {
+          "type": "string",
+          "example": ""
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "ErrorValidation": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "data": {
+          "type": "array"
+        },
+        "message": {
+          "type": "string",
+          "example": "Missing userId on the path|Validation error"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    }
+  }
+}

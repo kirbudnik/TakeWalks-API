@@ -1,0 +1,716 @@
+swagger: '2.0'
+info:
+  description: Walks Booking API 
+  version: 1.0.0
+  title: Walks Booking API
+  contact:
+    email: admins@walks.org
+host: staging-bookingapi.walks.org
+basePath: /v1
+tags:
+  - name: Booking
+    description: Operations on passes
+schemes:
+  - https
+paths:
+  /oauth/token:
+    post:
+      tags:
+        - OAuth
+      summary: Get the Bearer access_token
+      description: ''
+      operationId: postOauthToken
+      parameters:
+        - in: body
+          name: body
+          description: OauthToken object request
+          required: true
+          schema:
+            $ref: '#/definitions/OauthToken'
+      responses:
+        '200':
+          $ref: '#/responses/SuccessOauthBearerAccessToken'
+
+
+
+##################################
+## Booking Tag
+##################################
+
+  /booking/{booking_id}:
+    get:
+      tags:
+        - booking
+      summary: Gets all of this clients booking details by booking_id. Get cart.
+      description: ''
+      operationId: retrieveCart
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: booking_id
+          in: path
+          required: true
+          type: integer
+          minimum: 1
+          description: The booking id
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Success'
+            # data returns
+              # properties:
+              #   booking_id:
+              #     type: integer
+              #   booking_detail_id:
+              #     type: integer
+              #   number_adults:
+              #     type: string
+              #   number_seniors:
+              #     type: string
+              #   number_students:
+              #     type: string
+              #   number_children:
+              #     type: string
+              #   number_infants:
+              #     type: string
+              #   stage_id:
+              #     type: integer
+              #   booking_date:
+              #     type: string
+              #   imported_promo:
+              #     type: string
+              #   amount_local:
+              #     type: number
+              #   currency_exchange:
+              #     type: array
+        '400':
+          $ref: '#/responses/InvalidInput' 
+        '401':
+          $ref: '#/responses/Unauthorized' 
+        
+    delete:
+      tags:
+        - booking
+      summary: Remove all of clients booking details by booking id. Empty cart.
+      description: ''
+      operationId: removeCart 
+      parameters:
+        - name: booking_id
+          in: path
+          required: true
+          type: integer
+          minimum: 1
+          description: The booking id
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/Success'
+        '400':
+          $ref: '#/responses/InvalidInput' 
+        '401':
+          $ref: '#/responses/Unauthorized' 
+          
+  /booking/process/initialize:
+    post:
+      tags:
+        - booking
+      summary: Start the booking checkout process
+      description: ''
+      operationId: checkout
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Start the booking process and finalize the sale
+          required: true
+          schema:
+            $ref: '#/definitions/CartCheckout'
+      responses:
+        '200':
+          $ref: '#/responses/Success'
+            # data returns
+            # properties:
+              #   booking_id:
+              #     type: integer
+              #     format: int64
+        '400':
+          $ref: '#/responses/InvalidInput' 
+        '401':
+          $ref: '#/responses/Unauthorized'
+
+  /booking/process/finalize:
+    post:
+      tags:
+        - booking
+      summary: Finalize the booking process
+      description: ''
+      operationId: finalize
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Complete the booking process and finalize the sale
+          required: true
+          schema:
+            $ref: '#/definitions/CartFinalize'
+      responses:
+        '200':
+          $ref: '#/responses/Success'
+        '400':
+          $ref: '#/responses/InvalidInput' 
+        '401':
+          $ref: '#/responses/Unauthorized'
+          
+##################################
+## Cart Product Tag
+##################################
+        
+  /booking/product:
+    post:
+      tags:
+        - cart product
+      summary: Adds product to users cart
+      description: ''
+      operationId: addToCart
+      parameters:
+        - in: body
+          name: body
+          description: Add product to clients cart
+          required: true
+          schema:
+            $ref: '#/definitions/CartProductAdd'
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/Success'
+            # data returns
+            # properties:
+              # /definitions/CartProductAdd ??      
+        '400':
+          $ref: '#/responses/InvalidInput' 
+        '401':
+          $ref: '#/responses/Unauthorized'
+
+  /booking/{booking_id}/product/{stage_id}:
+    delete:
+      tags:
+        - cart product
+      summary: Remove product from cart 
+      operationId: cart product
+      parameters:
+        - name: booking_id
+          in: path
+          required: true
+          type: integer
+          minimum: 1
+          description: The booking id
+        - name: stage_id
+          in: path
+          required: true
+          type: integer
+          minimum: 1
+          description: The stage id
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/Success'
+        '400':
+          $ref: '#/responses/InvalidInput' 
+        '401':
+          $ref: '#/responses/Unauthorized' 
+
+##################################
+## Promo Tag
+##################################
+  /booking/promo:
+    post:
+      tags:
+        - promo
+      summary: Apply promo to clients cart total 
+      description: ''
+      operationId: addPromo
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Add promo adjustment to clients cart total
+          required: true
+          schema:
+            $ref: '#/definitions/PromoAdd'
+      responses:
+        '200':
+          $ref: '#/responses/Success'
+        '401':
+          $ref: '#/responses/Unauthorized'
+
+  /booking/{booking_id}/promo:
+    delete:
+      tags:
+        - promo
+      summary: Remove promo from clients cart total 
+      description: ''
+      operationId: removePromo
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: booking_id
+          in: path
+          required: true
+          type: integer
+          minimum: 1
+          description: The booking id
+      responses:
+        '200':
+          $ref: '#/responses/Success'
+        '401':
+          $ref: '#/responses/Unauthorized'
+
+##################################
+## Misc Tag
+##################################
+
+  /product:
+    get:
+      tags:
+        - product
+      summary: Gets list of all products
+      description: ''
+      operationId: retrieveProductList
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Success'
+              # data returns
+              # properties:
+              #   event_id:
+              #     type: integer
+              #   Need to determine rest of returned parameters
+        '401':
+          $ref: '#/responses/Unauthorized'
+          
+  /product/{stage_id}:
+    get:
+      tags:
+        - product
+      summary: Gets specific product
+      description: ''
+      operationId: retrieveProduct
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: stage_id
+          in: path
+          required: true
+          type: integer
+          minimum: 1
+          description: The stage id
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Success'
+            # data returns
+            # properties:
+              # event_id:
+              #     type: integer
+              #   Need to determine rest of returned parameters
+        '400':
+          description: Invalid product id supplied
+        '401':
+          $ref: '#/responses/Unauthorized'          
+
+  /product/availability:
+    post:
+      tags:
+      - product
+      summary: Find product availability
+      description: ''
+      operationId: productAvailability
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Search for booking on optional parameters
+          required: false
+          schema:
+            $ref: '#/definitions/ProductAvailability'
+      responses:
+        '200':
+          $ref: '#/responses/Success'
+        '401':
+          $ref: '#/responses/Unauthorized'
+          
+  /booking/search:
+    post:
+      tags:
+      - booking search
+      summary: Search for booking
+      description: ''
+      operationId: search
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Search for booking on optional parameters
+          required: false
+          schema:
+            $ref: '#/definitions/BookingSearch'
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Success'
+            # data returns
+              # properties:
+              #   booking_id:
+              #     type: integer
+              #   booking_detail_id:
+              #     type: integer
+              #   event_id:
+              #     type: integer
+              #   event_name:
+              #     type: string
+              #   event_datetime:
+              #     type: string
+              #   domain_id:
+              #     type: integer
+              #   booking_datetime:
+              #     type: string
+              #   is_paid: 
+              #     type: integer
+              #   is_cancelled:
+              #     type: integer
+              #   is_orphaned:
+              #     type: integer
+              #   is_archied:
+              #     type: integer
+              #   number_adults:
+              #     type: integer
+              #   number_seniors:
+              #     type: integer
+              #   number_students:
+              #     type: integer
+              #   number_children:
+              #     type: integer
+              #   number_infants:
+              #     type: integer
+              #   client_id:
+              #     type: integer
+              #   client_first_name:
+              #     type: string
+              #   client_last_name:
+              #     type: string
+              #   client_email:
+              #     type: string
+              #   client_phone:
+              #     type: string
+              #   agent_id:
+              #     type: integer
+              #   group_type:
+              #     type: string
+                  
+        '401':
+          $ref: '#/responses/Unauthorized' 
+          
+##################################
+## Response Definition
+##################################
+responses:
+  Success:
+    description: Success
+    schema:
+      $ref: '#/definitions/Success'
+  SuccessOauthBearerAccessToken:
+    description: Success
+    schema:
+      $ref: '#/definitions/OauthBearerAccessToken'
+  Unauthorized:
+    description: Unauthorized
+    schema:
+      $ref: '#/definitions/Error'
+  InvalidInput:
+    description: 'Input was missing the id or other field required, see data field for more specific information'
+      
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+
+
+##################################
+## Parameter Definitions
+## Input/Output
+##################################
+definitions:
+  
+## Input Parameter Definitions
+
+  PromoAdd:
+    type: object
+    required:
+      - booking_id
+      - promo_code
+    properties:
+      booking_id:
+        type: number
+        description: Numeric id of the booking. Optional on first product to add
+      promo_code:
+        type: string
+        description: Name of the promo code
+      
+  CartProductAdd:
+    type: object
+    required:
+      - stage_id
+      - date_time
+      - currency_code
+    properties:
+      booking_id:
+        type: number
+        description: Numeric id of the booking. Optional on first product to add
+      stage_id:
+        type: number
+        description: Numeric id of the stage
+      number_adults:
+        type: number
+        description: Numeric pax count to go on tour 
+      number_seniors:
+        type: number
+        description: Numeric pax count to go on tour 
+      number_students:
+        type: number
+        description: Numeric pax count to go on tour 
+      number_children:
+        type: number
+        description: Numeric pax count to go on tour 
+      number_infants:
+        type: number
+        description: Numeric pax count to go on tour 
+
+  CartCheckout:
+    type: object
+    required:
+      - booking_id
+      - first_name
+      - last_name
+      - email
+      - phone
+      - address
+      - city
+      - state
+      - zip
+      - country_code
+    properties:
+      booking_id:
+        type: number
+        description: Numeric id of the booking. Optional on first product to add
+      first_name:
+        type: string
+        description: Clients first name
+      last_name:
+        type: string
+        description: Clients last name
+      email:
+        type: string
+        description: Clients email address
+      phone:
+        type: string
+        description: Clients phone number
+      address:
+        type: string
+        description: Clients address
+      city:
+        type: string
+        description: Clients city
+      state:
+        type: string
+        description: Clients state
+      zip:
+        type: string
+        description: Clients zip code
+      country_code:
+        type:  string
+        description: Clients country code
+      sales_channel:
+        type: string
+        description: Description of where sales occured
+      agent_iatta:
+        type: string
+        description: Travel agents iatta number
+      client_id:
+        type: integer
+        description: Client id optional
+      
+  CartFinalize:
+    type: object
+    required:
+      - perform_charge
+      - booking_id
+      - currency_code
+      - sales_channel
+    properties:
+      perform_charge:
+        type: boolean
+        description: Boolean to charge credit card
+      booking_id:
+        type: number
+        description: Numeric id of the booking.
+      currency_code:
+        type: string
+        description: Currency abbreviation client is paying in 
+      cc_type:
+        type: string
+        description: 2 character type of credit card
+      cc_number:
+        type: string
+        description: Credit card number
+      cc_month:
+        type: string
+        description: Credit card month expiration
+      cc_year:
+        type: string
+        description: Credit card year expiration
+      cc_cvv:
+        type: string
+        description: Credit card CVV
+  
+  
+  BookingSearch:
+    type: object
+    properties:
+      booking_id:
+        type: number
+        description: Numeric id of the booking.
+      booking_detail_id:
+        type: number
+        description: Numeric id of the booking detail.
+      email:
+        type: string
+        description: Clients email address
+      client_id:
+        type: number
+        description: Numeric id of the client
+        
+  ProductAvailability:
+    type: object
+    required:
+      - start_date
+      - end_date
+    properties:
+      event_id:
+        type: number
+        description: Numeric id of the event.
+      product_id:
+        type: number
+        description: Numeric id of the product.
+      start_date:
+        type: string
+        description: Starting date
+      end_date:
+        type: string
+        description: End date
+        
+  OauthToken:
+    type: object
+    required:
+      - grant_type
+      - client_id
+      - client_secret
+      - scope
+    properties:
+      grant_type:
+        type: string
+        example: client_credentials
+      client_id:
+        type: string
+        example: 1
+      client_secret:
+        type: string
+        example: oug8G4X5IbD550ib4ST7XyOTF3Z2qdRmjwoSQ1Cq
+      scope:
+        type: string
+        example: '*'
+   
+## Output Definitions
+
+  Success:
+    type: object
+    properties:
+      code:
+        type: string
+      data:
+        type: string
+      message:
+        type: string
+    required:
+      - code
+      - message
+  
+  Error:
+    type: object
+    properties:
+      code:
+        type: string
+      message:
+        type: string
+    required:
+      - code
+      - message
+        
+  OauthBearerAccessToken:
+    type: object
+    required:
+      - token_type
+      - expires_in
+      - access_token
+    properties:
+      token_type:
+        type: string
+        example: Bearer
+      expires_in:
+        type: integer
+        example: 31536000
+      access_token:
+        type: string
+        example: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjQzZjI5ZjA4MDJiMGRlNmYwMjU2NGFhMWYwMmVjNDMwMTQ0ZDUzYzA0YWY3ZTFjYjE0NTkwZDBhODU5MTRmNDBkMWExMzMyMTk0YmIwMGRkIn0.eyJhdWQiOiIxIiwianRpIjoiNDNmMjlmMDgwMmIwZGU2ZjAyNTY0YWExZjAyZWM0MzAxNDRkNTNjMDRhZjdlMWNiMTQ1OTBkMGE4NTkxNGY0MGQxYTEzMzIxOTRiYjAwZGQiLCJpYXQiOjE1MDM5ODI5NjMsIm5iZiI6MTUwMzk4Mjk2MywiZXhwIjoxNTM1NTE4OTYzLCJzdWIiOiIiLCJzY29wZXMiOltdfQ.cJNvFz8VmtO_VU-R3wAagiDb-PoRKF0njtovpKsvSMpYeMls_v7EFl0P-J0jY0FXRos9BzFR2l3IP8tw2s4aQK5RuGeeMwAfUM8bsA5ShuAIdlP8KBzL4HemgwHplwudxGS_foMqZr8SXt9ps5rADf4FmpHouwESYbClXqTUXRl3wsmeOXYEGDBX2v_DR72rGTVHIX3Gr-ntEf3-r-RTFsSPDWN0SKCkK6fvT8Yw3z83sCrhamkmzq5-7MTZmeUDsrEmdYmHPsNIbnbP2g14pjh9vunOXh1pLw1GoYdvWXncBnoKe8ipkZZpjZ8J2LPe2LjZLMnjfTi0UjvO77yOs5R-dQ-lYmNtcgFQIfvkVckZeyHQQ8CQC78jbeX1iAiGJWSL2JcpEI9rlO_4I9VvWHEZWrFTnVg2bA51FmtLzyx31sz-k4oP5ASJPpC4BIrW0tllZvAXuPklTcNnToPWucUYNnh_LnOHONY3AfGkToNoxZSmcGPUVSOJF62mfIZ6U61dmUDu1TuB_4_HLdRNLOIYiAjGpUykbAckxFgOSITl1eYQEDMewdMSBbMDdy15Xox1ivfNMcjPwaP5Dp3Yv5fwuXzSy70bs2AElxmo4Sq3oL7IEZXESIRQDer4qWQTPMzT2ckgYT5tLA_vFW6g-g4TRjarGyvkzlelisObPMM
+
+
+
+

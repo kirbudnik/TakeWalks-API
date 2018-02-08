@@ -1,0 +1,525 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"Wapi",
+				"WapiConnectServiceProvider"
+			],
+			[
+				"Wa",
+				"WapiConnect"
+			],
+			[
+				"res",
+				"response"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 207.0,
+		"last_filter": "insta",
+		"selected_items":
+		[
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"pack",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 485.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"search hexviewer",
+			"Install Package",
+			"install HexViewer",
+			"search",
+			"Pretty JSON",
+			"install Pretty JSON",
+			"import urllib.request,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d39e33b79698005270310898eea76'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/dla/locker/walks/projects/userapi"
+	],
+	"file_history":
+	[
+		"/Users/dla/locker/walks/takewalks/nycFrontEnd/app/View/Themed/TakeWalks/webroot/js/app.js",
+		"/Users/dla/locker/walks/takewalks/nycFrontEnd/app/View/Themed/TakeWalks/webroot/js/global.js",
+		"/Users/dla/locker/walks/takewalks/nycFrontEnd/app/View/Themed/TakeWalks/webroot/js/FacebookWrapper.js",
+		"/Users/dla/locker/walks/takewalks/nycFrontEnd/app/View/Themed/TakeWalks/TakeWalks/event_detail.ctp",
+		"/Users/dla/locker/walks/ops db note",
+		"/Users/dla/locker/walks/walks-notes.txt",
+		"/Users/dla/locker/walks/takewalks/nycFrontEnd/app/View/Themed/TakeWalks/webroot/js/GoogleSignInWrapper.js",
+		"/Users/dla/Downloads/php-client 4/SwaggerClient-php/lib/Api/UserApi.php",
+		"/Users/dla/locker/walks/swaggerDocs/swagger2markup/usersapi.adoc",
+		"/Users/dla/locker/walks/swaggerDocs/v3/usersapi.md",
+		"/Users/dla/Downloads/php-client 4/SwaggerClient-php/lib/ApiClient.php",
+		"/Users/dla/Downloads/php-client 4/SwaggerClient-php/test/Api/UserApiTest.php",
+		"/Users/dla/locker/walks/user-porfile-api.txt",
+		"/Users/dla/locker/walks/projects/userapi/routes/web.php",
+		"/Users/dla/locker/walks/projects/userapi/readme.md",
+		"/Users/dla/locker/walks/projects/userapi/packages/walks/wapi-connect/src/routes.php",
+		"/Users/dla/locker/walks/projects/userapi/app/Models/MessagingTemplates.php",
+		"/Users/dla/locker/walks/adestra-php-notes.txt",
+		"/Users/dla/locker/walks/userapi-todo.txt",
+		"/Users/dla/locker/airglow/airglow.txt",
+		"/Users/dla/locker/walks/projects/userapi/app/Providers/AppServiceProvider.php",
+		"/Users/dla/locker/walks/projects/userapi/swagger/usersapi.json",
+		"/Users/dla/locker/walks/projects/userapi/app/Http/Middleware/ExampleMiddleware.php",
+		"/Users/dla/locker/walks/frontend-cache-issue.txt",
+		"/Users/dla/locker/walks/projects/userapi/composer.json",
+		"/Users/dla/locker/walks/projects/guideapi/bootstrap/app.php",
+		"/Users/dla/locker/walks/projects/guideapi/app/Http/Controllers/GuideApi.php",
+		"/Users/dla/locker/walks/projects/guideapi/routes/web.php",
+		"/Users/dla/locker/walks/homestead/Homestead.yaml",
+		"/Users/dla/locker/francais/Registration - Order summary 8-18-2017",
+		"/Users/dla/locker/walks/projects/userapi/database/migrations/2017_08_17_195240_update_clients_social_provider_table.php",
+		"/Users/dla/locker/walks/projects/userapi/database/migrations/2017_08_16_165922_update_clients_table.php",
+		"/Users/dla/locker/walks/projects/userapi/database/migrations/2017_08_09_175235_create_client_social_provider_table.php",
+		"/Users/dla/locker/walks/projects/userapi/app/Models/ClientSocialProvider.php",
+		"/Users/dla/locker/walks/expedia-var-trace",
+		"/Users/dla/locker/walks/distributorBookingAPI/endpoint/expedia/index.php",
+		"/Users/dla/locker/walks/distributorBookingAPI/distributor/expedia/availability/response.php",
+		"/Users/dla/locker/walks/081617-distapi-release.txt",
+		"/Users/dla/locker/walks/projects/userapi/app/Http/Controllers/UserApi.php",
+		"/Users/dla/locker/walks/081617.txt",
+		"/Users/dla/locker/walks/projects/userapi/app/Models/Client.php",
+		"/Users/dla/locker/walks/081617-ops-release.txt",
+		"/Users/dla/locker/walks/081617-release-script.txt",
+		"/Users/dla/locker/walks/projects/userapiSwagger/bootstrap/app.php",
+		"/Users/dla/locker/walks/wapi-users-api/usersapi.yml",
+		"/Users/dla/locker/walks/wapi-users-api/userAPI-swagger-lumen/app/Http/Controllers/UserApi.php",
+		"/Users/dla/locker/walks/wapi-users-api/UsersAPI-notes.txt",
+		"/Users/dla/locker/walks/wapi-users-api/validator.yml",
+		"/Users/dla/locker/francais/hw-114.txt",
+		"/Users/dla/locker/walks/airglow.txt",
+		"/Users/dla/locker/walks/73117-api.txt",
+		"/Users/dla/locker/Maxine-5thgrade.txt",
+		"/Users/dla/locker/walks/mkt-events.txt",
+		"/Users/dla/locker/walks/orbital-test.txt",
+		"/Users/dla/locker/francais/Quand se terminé Il faut branche.txt",
+		"/Users/dla/locker/walks/3s-note.txt",
+		"/Users/dla/locker/walks/distributorBookingAPI/tracing/debug.php",
+		"/Users/dla/locker/francais/hw-0717.txt",
+		"/Users/dla/locker/walks/deployer.txt",
+		"/Users/dla/locker/walks/wapi-users-api/UsersAPI/app/Models/User.php",
+		"/Users/dla/locker/walks/wapi-users-api/UsersAPI/app/Http/Controllers/UserController.php",
+		"/Users/dla/locker/walks/wapi-users-api/UsersAPI/routes/web.php",
+		"/Users/dla/locker/walks/wapi-users-api/UsersAPI/app/Http/Controllers/Controller.php",
+		"/Users/dla/locker/walks/wapi-users-api/UsersAPI/public/index.php",
+		"/Users/dla/locker/walks/day3motes.txt",
+		"/Users/dla/locker/walks/agenda.txt",
+		"/Users/dla/locker/walks/chase-orbital/5-20-securecode-sheet-v2.csv",
+		"/Users/dla/locker/internist.txt",
+		"/Users/dla/locker/walks/chase-orbital/5-20-securecode.csv",
+		"/Users/dla/locker/wf-payment-2.txt",
+		"/Users/dla/locker/walks/tableau/6-27-07.txt",
+		"/Users/dla/locker/francais/pour_pendant.txt",
+		"/Users/dla/locker/walks/star-takewalks-com.txt",
+		"/Users/dla/locker/walks/apache-debug.txt",
+		"/Users/dla/locker/walks/mailer.txt",
+		"/Users/dla/locker/walks/rDataLoader/events.json",
+		"/Users/dla/locker/walks/chase-orbital/Walks LLC - GW Testing Cases (4).txt",
+		"/Users/dla/locker/francais/benevoles-7-3.txt",
+		"/Users/dla/locker/walks/b2b notes.txt",
+		"/Users/dla/locker/walks/todo.txt",
+		"/Users/dla/locker/walks/tableau/rf.r",
+		"/Users/dla/locker/walks/tableau/tableau-notes.txt",
+		"/Users/dla/locker/walks/chase-orbital/5-20table.txt",
+		"/Users/dla/locker/walks/api-release-615.txt",
+		"/Users/dla/locker/walks/rDataLoader/serverless.yml",
+		"/Users/dla/locker/walks/rDataLoader/handler.js",
+		"/Users/dla/locker/walks/severless setup.txt",
+		"/Users/dla/locker/cars/beachtrip.txt",
+		"/Users/dla/locker/walks/deploy-target-06142017.txt",
+		"/Users/dla/locker/walks/viator.sql",
+		"/Users/dla/locker/walks/test-card.txt",
+		"/Users/dla/locker/wf-payment.txt",
+		"/Users/dla/locker/walks/gumbo recipe",
+		"/Users/dla/locker/cahoots/Cahoots-Server-develop/backend/s-project.json",
+		"/Users/dla/locker/cahoots/Cahoots-Server-develop/backend/package.json",
+		"/Users/dla/locker/cahoots/Cahoots-Server-develop/backend/lib/cahoots-accesstoken/index.js",
+		"/Users/dla/locker/secure/towalks-analytics-rstudio.sh",
+		"/Users/dla/dla-external-walks.ovpn",
+		"/Users/dla/locker/walks/chris-vimbly-walks.ovpn",
+		"/Users/dla/Downloads/stepheno.pub",
+		"/Users/dla/locker/secure/dla-ovpn/dla.ovpn",
+		"/Users/dla/Downloads/adestra-notes.txt",
+		"/Users/dla/locker/ops.txt",
+		"/Users/dla/locker/walks/rf-output-2017-06-02T14-46-04.csv",
+		"/Users/dla/locker/walks/adestraphp/demo.php",
+		"/Users/dla/locker/walks/adestraTransaction/node_modules/message-focus/lib/contact.js",
+		"/Users/dla/locker/walks/adestraTransaction/handler.js",
+		"/Users/dla/locker/walks/hereyougo.php",
+		"/Users/dla/Downloads/paymentech/samples/PerlSample/Samples/RefundSample.pl",
+		"/Users/dla/locker/walks/mailhelpernotes.txt",
+		"/Users/dla/locker/walks/todo-5-30.txt",
+		"/Users/dla/locker/walks/adestraTransaction/serverless.yml",
+		"/Users/dla/locker/walks/adestraTransaction/package.json",
+		"/Users/dla/locker/walks/walks_dev/Model/Payment.php",
+		"/Users/dla/locker/walks/message-focus/transaction-notes.txt",
+		"/Users/dla/locker/walks/var.html",
+		"/Users/dla/locker/walks/nycFrontEnd/app/Model/Payment.php",
+		"/Users/dla/locker/walks/message-focus/message-focus-nodejs/index.js",
+		"/Users/dla/locker/walks/paymentApi/src/Controller/Component/OrbitalGatewayComponent.php",
+		"/Users/dla/locker/walks/nycFrontEnd/app/Controller/PagesController.php",
+		"/Users/dla/locker/walks/paymentApi/src/Controller/PaymentsController.php",
+		"/Users/dla/locker/walks/paymentApi/src/Controller/AppController.php",
+		"/Users/dla/locker/walks/paymentApi/src/Model/Entity/Payment.php",
+		"/Users/dla/locker/walks/message-focus/message-focus-nodejs/lib/workspace.js",
+		"/Users/dla/locker/walks/message-focus/message-focus-nodejs/lib/project.js",
+		"/Users/dla/locker/walks/message-focus/message-focus-nodejs/lib/contact.js",
+		"/Users/dla/locker/walks/adestraTransaction/node_modules/message-focus/index.js",
+		"/Users/dla/locker/walks/message-focus/message-focus-nodejs/lib/campaign.js"
+	],
+	"find":
+	{
+		"height": 39.0
+	},
+	"find_in_files":
+	{
+		"height": 101.0,
+		"where_history":
+		[
+			"/Users/dla/locker/walks/takewalks/nycFrontEnd",
+			"/Users/dla/locker/walks/distributorBookingAPI",
+			"/Users/dla/locker/walks/walks_dev",
+			"/Users/dla/locker/walks/nycFrontEnd",
+			"/Users/dla/locker/walks/paymentApi",
+			"/Users/dla/locker/walks",
+			"/Users/dla/locker/walks/distributorBookingAPI",
+			"/Users/dla/locker/walks/",
+			"/Users/dla/locker/walks/coordPortal",
+			"/Users/dla/locker/walks/",
+			"/Users/dla/locker/walks/nycFrontEnd",
+			"/Users/dla/locker/walks/distributorBookingAPI",
+			"/Users/dla/locker/walks",
+			"/Users/dla/locker/walks/distributorBookingAPI",
+			"/Users/dla/locker/walks"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"ascii",
+			"1856044651312694",
+			"app_id",
+			"1856044651312694",
+			"290459239257",
+			"2017-07-07",
+			"2017-7-7",
+			"bd",
+			"wot_prod",
+			"woi_prod",
+			"wony_prod",
+			"dbal",
+			"bookin",
+			"tourlist",
+			"social",
+			"socialUserId",
+			"pars",
+			"activities",
+			"ma",
+			"mark",
+			"@",
+			"login",
+			"action",
+			"19119158",
+			"expired_hold_reservation",
+			":\\n",
+			":.+",
+			"LOG_FILE_PATH_ERROR",
+			"Dump",
+			"Cur",
+			"ApprovalStatus",
+			"foreaperl ~dla/foreachdiff.pl --docroot /var/www/api.walks.org --files ~dla/071317-deploy.txt -r",
+			"forea",
+			"SocialGraph",
+			"SocialGraph provider list",
+			"social",
+			"destination",
+			"array",
+			"latitude",
+			"updateUser",
+			"_auth",
+			"_uath",
+			"pet",
+			"petstore_auth",
+			"Pet",
+			"G",
+			".+\\[",
+			"[",
+			"] => ",
+			" ",
+			"\\|",
+			"|",
+			"\t",
+			"create",
+			"password",
+			"    \"",
+			"\":.+\",",
+			"\\n\\n",
+			"    \"",
+			"\":.+,",
+			"7e257e1e",
+			"analy",
+			"staging",
+			"pass",
+			"create",
+			"console.log",
+			"1000167170629131520",
+			"\",\"",
+			"maria",
+			"walks-main-staging-maria",
+			"aws",
+			"sendEmail",
+			"confirmationMailHelper",
+			"bookingsD",
+			"bookings_det",
+			"payment",
+			"confirmat",
+			"log",
+			"log_process",
+			"credit_card_log_path",
+			"stage_id",
+			"\t",
+			"cc_log",
+			"/process_log.txt",
+			"api_process_log.txt",
+			"_logProcess",
+			"process_log.txt",
+			"event",
+			"_submitUrl",
+			"chase",
+			"_submitUrl",
+			"paymentech.net",
+			"doOrbitalPayment",
+			"mailerAddress",
+			"Access",
+			"ASIAI5MTBMEENORBGQEQ",
+			"[^\\x00-\\x7F]",
+			"46018P1",
+			"david@walks.",
+			"mail",
+			"mailchi",
+			"mand",
+			"=",
+			"walks",
+			"cloud",
+			"# 1 row affected.",
+			"client1",
+			"AKIAJPHQKBBGI2NBOS3Q",
+			"AKIAJQAFODUKEMC5FMHA",
+			"Access",
+			"ASIAJTPMQMTHENU4EVSA",
+			"AKIAJPHQKBBGI2NBOS3Q\n",
+			"cloud",
+			"-\n300",
+			"###############################################################################\nDeployment method\n\nThese instructions are for core developers who create a release or hotfix.\n\nStep 1.\nMarshall your branch into \"staging\".  \nThere are lots of way to do this and we need to talk about it but I think merging along the lines of this doc might help \nIn that doc we would be using \"git checkout staging\" when they say \"git checkout master\"\n\nhttps://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging#_basic_merging\n\n\n###############################################################################\nStep 2:\nKnow the list of tickets affected in this release.\n\nTickets affected will help determine the scope of the changed files and focus testing.\n\n\n###############################################################################\nStep 3:\nssh to staging-api\ndla@staging-api:~$ cd /var/www/api2.walks.org/\n\n\nCheck branch status:\ndla@staging-api:/var/www/api2.walks.org$ git status\nOn branch staging\nYour branch is up-to-date with 'origin/staging'.\nnothing to commit, working directory clean\n\nOtherwise fix the issues...\n\n\n###############################################################################\nStep 4:\ndiff staging against last known release tag, no tag? try staging, no staging? well perhaps post migration produciton git status? other side try to decode the semantic verison of github branch names and sanity check using rsync below.\n\nIf you have no previous tag but just *know* api-2.1.4 was deployed..\ngit diff api-2.1.4... --name-only\n\nIf you do know the tag...\ngit diff -v v2.1.6... --name-only\n\n--- either way you will get a list of files...\n\n\n\n###############################################################################\nStep 5:\ndiff staging against production usign rsync --dry-run\n\nrsync source to target (dry-run):\nrsync -avzhe ssh --dry-run --progress --exclude '.DS_Store' --exclude '.git' --exclude '.htaccess' --exclude 'sandbox' --exclude 'config' /var/www/api2.walks.org/ production-api.local.walks:/var/www/api2.walks.org/\n\nYou should get almost the same list of files..\n\n\nyou can diff a file if it does not make sense or it's a core file and you want to know what's going on?\n\n\nall good?  if not, like you get a a huge amount files then consult with all of us.\n###############################################################################\nStep 6:\nNow we have a release candidate\nwe can test staging the last time.\n\n\nall good? \n###############################################################################\nStep 7:\n\n\nSend it to production:\nrsync -avzhe ssh  --progress --exclude ‘.DS_Store’ --exclude ‘.git’ --exclude ‘.htaccess’ --exclude ‘sandbox’ --exclude ‘config’ /var/www/api2.walks.org/ production-api.local.walks:/var/www/api2.walks.org/\n\nA word about unfettered changes to .htaccess and config.  Often changes to .htaccess or config imply a security review or change in the stack.  \n\n\n\n###############################################################################\nStep 8:\n\ntest production.\n\n\n\n###############################################################################\nStep 9:\ntag the release\n\nsay release tag v2.1.6\n\ngit tag -a v2.1.6 -m \"api hotfix re #232\"\n           ------                 ---\n              |                    |\n           (SemVer) -              |\n           http://semver.org/.     |\n\n           \t\t\t\t\t\t   List of affected tickets: re #232, re #NNN, etc.\n                                   re#232 = Assembla ticket #232 Distributor API : Hotfix - ThisConfigurationNotAvailable\n                                   ...\n# share that tag\ngit push origin v2.1.6\n\nEmail the release notes which are at a minimum the release tag, the list of tickets affected and the time it occured.\n\n\n\n###############################################\n\n\n\n\n\n",
+			"dev1",
+			"app4",
+			"dev1",
+			"spect",
+			"time",
+			"timewar",
+			"~dla/api3.walks.org",
+			"password",
+			"create",
+			"vimbly-walks",
+			"localDate",
+			"CompileRequestAPIData_ExecuteRequest",
+			"readonly"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": true,
+		"replace_history":
+		[
+			"2017-08-23",
+			"2017-8-23",
+			":\\n    type: \"string\"\\n",
+			"\\n    type: \"string\"\\n",
+			"\\n    type: \"string\"",
+			":",
+			"",
+			"Wishlist",
+			"Wishlist of events",
+			"wishlist",
+			"traveler",
+			"user",
+			"userapi_auth",
+			"User",
+			"",
+			" : ",
+			"",
+			" ",
+			",",
+			"",
+			"\\n",
+			"",
+			"\\n",
+			"/n",
+			";\\n",
+			"dla",
+			"",
+			"/var/www/api2.walks.org",
+			"\"cc_number\":\"REDACTED\"",
+			"\"",
+			"feedback",
+			"_",
+			"coordinator_",
+			"coordinator_prod_",
+			"wot_prod_",
+			"wony_prod_",
+			"see_file",
+			"V83eUel3c8Ri2Yok",
+			"walks_staging_db",
+			"walks-main-staging-01",
+			"feedback",
+			"coordinator",
+			"wot",
+			"wony",
+			"Prod",
+			"walks-main-staging-01",
+			"walks-main-prod-reporting-01",
+			"Dev-Feedback-0",
+			"walks-main-prod-reporting-01",
+			"walks-main-staging-01",
+			"util-buildserver-1"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 25.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.hex_viewer_inspector":
+	{
+		"height": 112.0
+	},
+	"pinned_build_system": "",
+	"project": "userapi.sublime-project",
+	"replace":
+	{
+		"height": 46.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"untitled"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 234.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

@@ -1,0 +1,1317 @@
+= Walks User API
+
+
+[[_overview]]
+== Overview
+.
+
+
+=== Version information
+[%hardbreaks]
+__Version__ : 1.0.0
+
+
+=== Contact information
+[%hardbreaks]
+__Contact Email__ : admins@walks.org
+
+
+=== URI scheme
+[%hardbreaks]
+__Host__ : local-userapi.walks.org
+__BasePath__ : /v1
+__Schemes__ : HTTP
+
+
+=== Tags
+
+* user : Operations on users
+
+
+
+
+[[_paths]]
+== Paths
+
+[[_postoauthtoken]]
+=== Get the Bearer access_token
+....
+POST /oauth/token
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Body**|**body** +
+__required__|OauthToken object request|<<_oauthtoken,OauthToken>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|Success|<<_oauthbeareraccesstoken,OauthBearerAccessToken>>
+|===
+
+
+==== Tags
+
+* OAuth
+
+
+[[_adduser]]
+=== Add a new user
+....
+POST /user
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Body**|**body** +
+__required__|User object that needs to be added|<<_user,User>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|Success|<<_successusercreated,SuccessUserCreated>>
+|**401**|Unauthorized|<<_error,Error>>
+|**405**|Input was missing the userId or other body field required, see data field for more specific information|<<_errorvalidation,ErrorValidation>>
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/json`
+
+
+==== Tags
+
+* user
+
+
+[[_loginuser]]
+=== Log user into the system
+....
+GET /user/login
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Query**|**email** +
+__required__|The user email for login|string
+|**Query**|**password** +
+__required__|The password for login in clear text|string
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|successful operation|No Content
+|**400**|Invalid username/password supplied|No Content
+|===
+
+
+==== Produces
+
+* `application/json`
+
+
+==== Tags
+
+* user
+
+
+[[_logoutuser]]
+=== Log out current logged in user session
+....
+GET /user/logout
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Query**|**email** +
+__required__|The user email for login|string
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|successful operation|No Content
+|===
+
+
+==== Produces
+
+* `application/json`
+
+
+==== Tags
+
+* user
+
+
+[[_passwordemail]]
+=== Sends password reset email
+....
+PUT /user/passwordEmail
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Body**|**body** +
+__required__|email address to reset|string (email)
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|Success|<<_successuserupdated,SuccessUserUpdated>>
+|**401**|Unauthorized|<<_error,Error>>
+|**405**|Input was missing the userId or other body field required, see data field for more specific information|<<_errorvalidation,ErrorValidation>>
+|===
+
+
+==== Produces
+
+* `application/json`
+
+
+==== Tags
+
+* user
+
+
+[[_updateuser]]
+=== Update a user
+....
+POST /user/{userId}
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Path**|**userId** +
+__required__|userId object that needs to be updated|integer (int64)
+|**Body**|**body** +
+__required__|User object that needs to be added|<<_user,User>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|Success|<<_successuserupdated,SuccessUserUpdated>>
+|**401**|Unauthorized|<<_error,Error>>
+|**405**|Input was missing the userId or other body field required, see data field for more specific information|<<_errorvalidation,ErrorValidation>>
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/json`
+
+
+==== Tags
+
+* user
+
+
+[[_getuserbyid]]
+=== Find user by userId
+....
+GET /user/{userId}
+....
+
+
+==== Description
+Returns a single user
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Path**|**userId** +
+__required__|userId of user to return|integer (int64)
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|Success|<<_successuserupdated,SuccessUserUpdated>>
+|**401**|Unauthorized|<<_error,Error>>
+|**405**|Input was missing the userId or other body field required, see data field for more specific information|<<_errorvalidation,ErrorValidation>>
+|===
+
+
+==== Produces
+
+* `application/json`
+
+
+==== Tags
+
+* user
+
+
+==== Security
+
+[options="header", cols=".^3,.^4"]
+|===
+|Type|Name
+|**apiKey**|**<<_bearer,Bearer>>**
+|===
+
+
+[[_deleteuser]]
+=== Delete a user
+....
+DELETE /user/{userId}
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Path**|**userId** +
+__required__|User id to delete|integer (int64)
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|Success|<<_success,Success>>
+|**401**|Unauthorized|<<_error,Error>>
+|**405**|Input was missing the userId or other body field required, see data field for more specific information|<<_errorvalidation,ErrorValidation>>
+|===
+
+
+==== Produces
+
+* `application/json`
+
+
+==== Tags
+
+* user
+
+
+[[_userbookingcancel]]
+=== Request a booking cancel
+....
+POST /user/{userId}/booking/cancel
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Path**|**userId** +
+__required__|ID of user|integer (int64)
+|**Body**|**body** +
+__required__|booking object that needs to be canceled|<<_bookingcancel,BookingCancel>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|successful operation|No Content
+|**400**|Invalid userId supplied|No Content
+|===
+
+
+==== Produces
+
+* `application/json`
+
+
+==== Tags
+
+* user
+
+
+[[_adduserdestination]]
+=== Add to users destination list
+....
+POST /user/{userId}/destination
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Path**|**userId** +
+__required__|ID of user to append destination|integer (int64)
+|**Body**|**body** +
+__required__|destination object that needs to be added|<<_destination,Destination>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|successful operation|No Content
+|**400**|Invalid userId supplied|No Content
+|===
+
+
+==== Produces
+
+* `application/json`
+
+
+==== Tags
+
+* user
+
+
+[[_userdestination]]
+=== Get user destination list
+....
+GET /user/{userId}/destination
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Path**|**userId** +
+__required__|ID of user to fetch|integer (int64)
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|successful operation|< <<_destination,Destination>> > array
+|**400**|Invalid userId supplied|No Content
+|===
+
+
+==== Produces
+
+* `application/json`
+
+
+==== Tags
+
+* user
+
+
+[[_deleteuserdestination]]
+=== Deletes a destination
+....
+DELETE /user/{userId}/destination
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Path**|**userId** +
+__required__|User id to manipulate|integer (int64)
+|**Body**|**body** +
+__required__|Destination object that needs to be deleted|<<_destination,Destination>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|successful operation|No Content
+|**400**|Invalid userId supplied|No Content
+|===
+
+
+==== Produces
+
+* `application/json`
+
+
+==== Tags
+
+* user
+
+
+[[_passwordreset]]
+=== User password reset
+....
+PUT /user/{userId}/passwordReset
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Path**|**userId** +
+__required__|ID of user to fetch|integer (int64)
+|**Body**|**body** +
+__required__|User object password reset|<<_passwordreset,PasswordReset>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|Success|<<_successuserupdated,SuccessUserUpdated>>
+|**401**|Unauthorized|<<_error,Error>>
+|**405**|Input was missing the userId or other body field required, see data field for more specific information|<<_errorvalidation,ErrorValidation>>
+|===
+
+
+==== Produces
+
+* `application/json`
+
+
+==== Tags
+
+* user
+
+
+[[_addusersocialprovider]]
+=== Add to users SocialGraph provider list
+....
+POST /user/{userId}/social
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Path**|**userId** +
+__required__|ID of user to append SocialGraph Provider|integer (int64)
+|**Body**|**body** +
+__required__|SocialGraph object that needs to be added|<<_socialgraph,SocialGraph>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|successful operation|No Content
+|**400**|Invalid userId supplied|No Content
+|===
+
+
+==== Produces
+
+* `application/json`
+
+
+==== Tags
+
+* user
+
+
+[[_usersocial]]
+=== Get user social graph
+....
+GET /user/{userId}/social
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Path**|**userId** +
+__required__|ID of user to fetch|integer (int64)
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|Success|<<_successsocialget,SuccessSocialGet>>
+|**401**|Unauthorized|<<_error,Error>>
+|**405**|Input was missing the userId or other body field required, see data field for more specific information|<<_errorvalidation,ErrorValidation>>
+|===
+
+
+==== Produces
+
+* `application/json`
+
+
+==== Tags
+
+* user
+
+
+[[_deleteusersocialprovider]]
+=== Deletes a social provider
+....
+DELETE /user/{userId}/social
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Path**|**userId** +
+__required__|User id to manipulate|integer (int64)
+|**Body**|**body** +
+__required__|SocialGraph object that needs to be added|<<_socialgraph,SocialGraph>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|successful operation|No Content
+|**400**|Invalid userId supplied|No Content
+|===
+
+
+==== Produces
+
+* `application/json`
+
+
+==== Tags
+
+* user
+
+
+[[_usertourlist]]
+=== Get list of past and future tours
+....
+GET /user/{userId}/tourlist
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Path**|**userId** +
+__required__|ID of user to fetch|integer (int64)
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|successful operation|< <<_usertours,UserTours>> > array
+|**400**|Invalid userId supplied|No Content
+|===
+
+
+==== Produces
+
+* `application/json`
+
+
+==== Tags
+
+* user
+
+
+[[_addusertraveler]]
+=== Add to users traveler list
+....
+POST /user/{userId}/traveler
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Path**|**userId** +
+__required__|ID of user to append traveler|integer (int64)
+|**Body**|**body** +
+__required__|traveler object that needs to be added|<<_traveler,Traveler>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|successful operation|No Content
+|**400**|Invalid userId supplied|No Content
+|===
+
+
+==== Produces
+
+* `application/json`
+
+
+==== Tags
+
+* user
+
+
+[[_usertraveler]]
+=== Get user traveler list
+....
+GET /user/{userId}/traveler
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Path**|**userId** +
+__required__|ID of user to fetch|integer (int64)
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|successful operation|< <<_traveler,Traveler>> > array
+|**400**|Invalid userId supplied|No Content
+|===
+
+
+==== Produces
+
+* `application/json`
+
+
+==== Tags
+
+* user
+
+
+[[_deleteusertraveler]]
+=== Deletes a traveler
+....
+DELETE /user/{userId}/traveler
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Path**|**userId** +
+__required__|User id to manipulate|integer (int64)
+|**Body**|**body** +
+__required__|Traveler object that needs to be deleted|<<_traveler,Traveler>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|successful operation|No Content
+|**400**|Invalid userId supplied|No Content
+|===
+
+
+==== Produces
+
+* `application/json`
+
+
+==== Tags
+
+* user
+
+
+[[_adduserwishlist]]
+=== Add to users Wishlist of events
+....
+POST /user/{userId}/wishlist
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Path**|**userId** +
+__required__|ID of user to append Wishlist|integer (int64)
+|**Body**|**body** +
+__required__|Wishlist object that needs to be added|<<_usertours,UserTours>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|successful operation|No Content
+|**400**|Invalid userId supplied|No Content
+|===
+
+
+==== Produces
+
+* `application/json`
+
+
+==== Tags
+
+* user
+
+
+[[_userwishlist]]
+=== Get user wishlist of events
+....
+GET /user/{userId}/wishlist
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Path**|**userId** +
+__required__|ID of user to fetch|integer (int64)
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|successful operation|< <<_usertours,UserTours>> > array
+|**400**|Invalid userId supplied|No Content
+|===
+
+
+==== Produces
+
+* `application/json`
+
+
+==== Tags
+
+* user
+
+
+[[_deletewishlistitem]]
+=== Deletes a wishlist item
+....
+DELETE /user/{userId}/wishlist
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Path**|**userId** +
+__required__|User id to manipulate|integer (int64)
+|**Body**|**body** +
+__required__|Wishlist object that needs to be deleted|<<_usertours,UserTours>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|successful operation|No Content
+|**400**|Invalid userId supplied|No Content
+|===
+
+
+==== Produces
+
+* `application/json`
+
+
+==== Tags
+
+* user
+
+
+
+
+[[_definitions]]
+== Definitions
+
+[[_apiresponse]]
+=== ApiResponse
+
+[options="header", cols=".^3,.^4"]
+|===
+|Name|Schema
+|**code** +
+__optional__|integer (int32)
+|**data** +
+__optional__|string
+|**message** +
+__optional__|string
+|===
+
+
+[[_bookingcancel]]
+=== BookingCancel
+
+[options="header", cols=".^3,.^4"]
+|===
+|Name|Schema
+|**bookingId** +
+__required__|integer (int64)
+|**tourEventId** +
+__required__|integer (int64)
+|===
+
+
+[[_destination]]
+=== Destination
+
+[options="header", cols=".^3,.^4"]
+|===
+|Name|Schema
+|**city** +
+__required__|string
+|**email** +
+__optional__|string
+|**endDate** +
+__optional__|string
+|**hotel** +
+__optional__|string
+|**hotelPhone** +
+__optional__|string
+|**id** +
+__optional__|integer (int64)
+|**startDate** +
+__optional__|string
+|===
+
+
+[[_error]]
+=== Error
+
+[options="header", cols=".^3,.^4"]
+|===
+|Name|Schema
+|**code** +
+__required__|string
+|**message** +
+__required__|string
+|===
+
+
+[[_errorvalidation]]
+=== ErrorValidation
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**code** +
+__required__||string
+|**data** +
+__optional__||< object > array
+|**message** +
+__required__|**Example** : `"Missing userId on the path\|Validation error"`|string
+|===
+
+
+[[_oauthbeareraccesstoken]]
+=== OauthBearerAccessToken
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**access_token** +
+__required__|**Example** : `"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjQzZjI5ZjA4MDJiMGRlNmYwMjU2NGFhMWYwMmVjNDMwMTQ0ZDUzYzA0YWY3ZTFjYjE0NTkwZDBhODU5MTRmNDBkMWExMzMyMTk0YmIwMGRkIn0.eyJhdWQiOiIxIiwianRpIjoiNDNmMjlmMDgwMmIwZGU2ZjAyNTY0YWExZjAyZWM0MzAxNDRkNTNjMDRhZjdlMWNiMTQ1OTBkMGE4NTkxNGY0MGQxYTEzMzIxOTRiYjAwZGQiLCJpYXQiOjE1MDM5ODI5NjMsIm5iZiI6MTUwMzk4Mjk2MywiZXhwIjoxNTM1NTE4OTYzLCJzdWIiOiIiLCJzY29wZXMiOltdfQ.cJNvFz8VmtO_VU-R3wAagiDb-PoRKF0njtovpKsvSMpYeMls_v7EFl0P-J0jY0FXRos9BzFR2l3IP8tw2s4aQK5RuGeeMwAfUM8bsA5ShuAIdlP8KBzL4HemgwHplwudxGS_foMqZr8SXt9ps5rADf4FmpHouwESYbClXqTUXRl3wsmeOXYEGDBX2v_DR72rGTVHIX3Gr-ntEf3-r-RTFsSPDWN0SKCkK6fvT8Yw3z83sCrhamkmzq5-7MTZmeUDsrEmdYmHPsNIbnbP2g14pjh9vunOXh1pLw1GoYdvWXncBnoKe8ipkZZpjZ8J2LPe2LjZLMnjfTi0UjvO77yOs5R-dQ-lYmNtcgFQIfvkVckZeyHQQ8CQC78jbeX1iAiGJWSL2JcpEI9rlO_4I9VvWHEZWrFTnVg2bA51FmtLzyx31sz-k4oP5ASJPpC4BIrW0tllZvAXuPklTcNnToPWucUYNnh_LnOHONY3AfGkToNoxZSmcGPUVSOJF62mfIZ6U61dmUDu1TuB_4_HLdRNLOIYiAjGpUykbAckxFgOSITl1eYQEDMewdMSBbMDdy15Xox1ivfNMcjPwaP5Dp3Yv5fwuXzSy70bs2AElxmo4Sq3oL7IEZXESIRQDer4qWQTPMzT2ckgYT5tLA_vFW6g-g4TRjarGyvkzlelisObPMM"`|string
+|**expires_in** +
+__required__|**Example** : `31536000`|integer
+|**token_type** +
+__required__|**Example** : `"Bearer"`|string
+|===
+
+
+[[_oauthtoken]]
+=== OauthToken
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**client_id** +
+__required__|**Example** : `"1"`|string
+|**client_secret** +
+__required__|**Example** : `"oug8G4X5IbD550ib4ST7XyOTF3Z2qdRmjwoSQ1Cq"`|string
+|**grant_type** +
+__required__|**Example** : `"client_credentials"`|string
+|**scope** +
+__required__|**Example** : `"*"`|string
+|===
+
+
+[[_passwordreset]]
+=== PasswordReset
+
+[options="header", cols=".^3,.^4"]
+|===
+|Name|Schema
+|**newPassword** +
+__required__|string
+|**passwordKey** +
+__required__|string
+|===
+
+
+[[_socialgraph]]
+=== SocialGraph
+
+[options="header", cols=".^3,.^4"]
+|===
+|Name|Schema
+|**metadata** +
+__optional__|string
+|**provider** +
+__required__|string
+|**socialUserId** +
+__required__|string
+|===
+
+
+[[_success]]
+=== Success
+
+[options="header", cols=".^3,.^4"]
+|===
+|Name|Schema
+|**code** +
+__required__|string
+|**data** +
+__optional__|string
+|**message** +
+__required__|string
+|===
+
+
+[[_successsocialget]]
+=== SuccessSocialGet
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**code** +
+__required__|**Example** : `200`|integer (int32)
+|**data** +
+__optional__||<<_successsocialget_data,data>>
+|**message** +
+__required__|**Example** : `""`|string
+|===
+
+[[_successsocialget_data]]
+**data**
+
+[options="header", cols=".^3,.^4"]
+|===
+|Name|Schema
+|**socialProviders** +
+__optional__|< <<_socialgraph,SocialGraph>> > array
+|===
+
+
+[[_successusercreated]]
+=== SuccessUserCreated
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**code** +
+__required__|**Example** : `200`|integer (int32)
+|**data** +
+__optional__||<<_successusercreated_data,data>>
+|**message** +
+__required__|**Example** : `"recovered\|created"`|string
+|===
+
+[[_successusercreated_data]]
+**data**
+
+[options="header", cols=".^3,.^4"]
+|===
+|Name|Schema
+|**user** +
+__optional__|<<_user,User>>
+|===
+
+
+[[_successuserget]]
+=== SuccessUserGet
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**code** +
+__required__|**Example** : `200`|integer (int32)
+|**data** +
+__optional__||<<_successuserget_data,data>>
+|**message** +
+__required__|**Example** : `""`|string
+|===
+
+[[_successuserget_data]]
+**data**
+
+[options="header", cols=".^3,.^4"]
+|===
+|Name|Schema
+|**user** +
+__optional__|<<_user,User>>
+|===
+
+
+[[_successuserupdated]]
+=== SuccessUserUpdated
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**code** +
+__required__|**Example** : `200`|integer (int32)
+|**data** +
+__optional__||<<_successuserupdated_data,data>>
+|**message** +
+__required__|**Example** : `"User updated"`|string
+|===
+
+[[_successuserupdated_data]]
+**data**
+
+[options="header", cols=".^3,.^4"]
+|===
+|Name|Schema
+|**user** +
+__optional__|<<_user,User>>
+|===
+
+
+[[_traveler]]
+=== Traveler
+
+[options="header", cols=".^3,.^4"]
+|===
+|Name|Schema
+|**email** +
+__required__|string
+|**fname** +
+__required__|string
+|**id** +
+__optional__|integer (int64)
+|**lname** +
+__required__|string
+|**password** +
+__optional__|string
+|**phone** +
+__optional__|string
+|**username** +
+__optional__|string
+|===
+
+
+[[_user]]
+=== User
+
+[options="header", cols=".^3,.^4"]
+|===
+|Name|Schema
+|**account_status** +
+__optional__|string
+|**address** +
+__optional__|string
+|**agents_id** +
+__optional__|string
+|**audience_reward** +
+__optional__|string
+|**city** +
+__optional__|string
+|**contact_email** +
+__optional__|string
+|**cookie_auth** +
+__optional__|string
+|**countries_id** +
+__optional__|string
+|**email** +
+__required__|string
+|**facebook_id** +
+__optional__|string
+|**fname** +
+__optional__|string
+|**guest** +
+__optional__|string
+|**home_number** +
+__optional__|string
+|**id** +
+__optional__|integer (int64)
+|**is_subscribed** +
+__optional__|string
+|**last_ip_address_used** +
+__optional__|string
+|**last_purchase_date** +
+__optional__|string
+|**last_time_logged_in** +
+__optional__|string
+|**learned_about_walks** +
+__optional__|string
+|**lname** +
+__optional__|string
+|**mobile_number** +
+__optional__|string
+|**password** +
+__optional__|string
+|**state** +
+__optional__|string
+|**title** +
+__optional__|string
+|**user_name** +
+__optional__|string
+|**zip** +
+__optional__|string
+|===
+
+
+[[_usertours]]
+=== UserTours
+
+[options="header", cols=".^3,.^4"]
+|===
+|Name|Schema
+|**description** +
+__optional__|string
+|**image** +
+__optional__|string
+|**name** +
+__optional__|string
+|**price** +
+__optional__|string
+|**tourDateTime** +
+__optional__|string
+|**tourId** +
+__optional__|integer (int64)
+|**tourInfoLink** +
+__optional__|string
+|**tourServiceLink** +
+__optional__|string
+|**tourStatus** +
+__optional__|string
+|===
+
+
+
+
+[[_securityscheme]]
+== Security
+
+[[_bearer]]
+=== Bearer
+[%hardbreaks]
+__Type__ : apiKey
+__Name__ : Authorization
+__In__ : HEADER
+
+
+
